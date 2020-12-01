@@ -2,11 +2,11 @@ import React from 'react';
 import MovieCard from './MovieCard';
 
 const Movies = ({movies}) => {
-  const movieCards = movies.movies.map((movie) => {
+  const movieCards = movies.map((movie) => {
     return (
       <MovieCard
         title={movie.title}
-        avgRating={movie.average_rating}
+        avgRating={movie.average_rating.toFixed(1)}
         releaseDate={movie.release_date}
         posterImg={movie.poster_path}
         key={movie.id}
@@ -14,9 +14,9 @@ const Movies = ({movies}) => {
     )
   })
   return (
-    <div className='movies-container'>
+    <section className='movies-container'>
       {movieCards}
-    </div>
+    </section>
   )
 }
 

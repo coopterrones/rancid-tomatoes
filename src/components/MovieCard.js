@@ -5,8 +5,8 @@ const MovieCard = ({title, avgRating, releaseDate, posterImg}) => {
     <div className='movie-card'>
       <img src={posterImg}/>
       <h3>{title}</h3>
-      <p>{avgRating}</p>
-      <p>{releaseDate}</p>
+      <p>Rating: {avgRating}</p>
+      <p>Release Date: {releaseDate}</p>
     </div>
   )
 }
