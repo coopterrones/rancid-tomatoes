@@ -30,7 +30,14 @@ const movieData = {
       "backdrop_path": "https://image.tmdb.org/t/p/original//54yOImQgj8i85u9hxxnaIQBRUuo.jpg",
       "title": "Ava",
       "average_rating": 5.111111111111111,
-      "release_date": "2020-07-02"
+      "release_date": "2020-07-02",
+      //below from API, need to delete later//
+      "overview": "A black ops assassin is forced to fight for her own survival after a job goes dangerously wrong.",
+      "genres":["Action","Crime","Drama","Thriller"],
+      "budget":0,
+      "revenue":152812,
+      "runtime":96,
+      "tagline":"Kill. Or be killed.",
     },
     {
       "id": 581392,
