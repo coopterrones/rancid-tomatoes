@@ -1,0 +1,30 @@
+.backdrop-img {
+  background-color: #000;
+  // z-index: 9999;
+}
+
+.backdrop-img img {
+  height: auto;
+  width: 100%;
+  // z-index: 9999;
+  opacity: 0.7;
+}
+
+.chosen-movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.numeric-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.genre,
+.monetary-info {
+  display: flex;
+  justify-content: space-around;
+}
+

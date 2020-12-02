@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/ChosenMovie.scss';
 
 const ChosenMovie = ({movie, displayAllMovies}) => {
   let genres;
@@ -11,19 +12,26 @@ const ChosenMovie = ({movie, displayAllMovies}) => {
 
   return (
     <section className='chosen-movie'>
-      <section>
-        <img src={movie.poster_path} className='poster-img' alt={movie.title}/>
-        <img src={movie.backdrop_path} className='poster-img' alt={movie.title}/>
+      <section className='backdrop-img'>
+        <img src={movie.backdrop_path} alt={movie.title}/>
       </section>
       <section>
         <h3>{movie.title}</h3>
-        <p>Rating: {movie.average_rating.toFixed(1)}</p>
-        <p>Release Date: {movie.release_date}</p>
+        <section className='numeric-info'>
+          <p>Rating: {movie.average_rating.toFixed(1)}</p>
+          <p>Runtime: {movie.runtime}</p>
+          <p>Release Date: {movie.release_date}</p>
+        </section>
+        
         <p>Overview: {movie.overview}</p>
-        <section>Genres: {genres}</section>
-        <p>Budget: {movie.budget}</p>
-        <p>Revenue: {movie.revenue}</p>
-        <p>Runtime: {movie.runtime}</p>
+
+        <section className='genre'>{genres}</section>
+        <section className='monetary-info'>
+          <p>Budget: ${movie.budget}</p>
+          <p>Revenue: ${movie.revenue}</p>
+        </section>
+        
+        
         <p>Tagline: {movie.tagline}</p>
       </section>
       <button onClick={displayAllMovies}>Go Back</button>
