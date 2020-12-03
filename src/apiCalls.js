@@ -11,5 +11,9 @@ export const apiCalls = {
 
   selectMovie: (id) => {
     return getData(`https://rancid-tomatillos.herokuapp.com/api/v2//movies/${id}`)
+  },
+
+  selectVideo: (id) => {
+    return getData(`https://rancid-tomatillos.herokuapp.com/api/v2//movies/${id}/videos`)
   }
 }

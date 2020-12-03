@@ -10,7 +10,8 @@ class App extends Component {
     super();
     this.state = {
       movies: [],
-      chosenMovie: null
+      chosenMovie: null,
+      chosenVideo: null
     }
   }
 
@@ -24,13 +25,24 @@ class App extends Component {
   }
 
   handleClick = (id) => {
-    apiCalls.selectMovie(id)
+    Promise.all([apiCalls.selectMovie(id), apiCalls.selectVideo(id)])
       .then(data => {
-          this.setState({
-            chosenMovie: data.movie
-          })
+        console.log(data)
+        const chosenMovie = data.reduce((chosenMovieData, eachDataset) => {
+          return chosenMovieData = {...chosenMovieData, ...eachDataset}
+        }, {});
+      this.setState({
+        chosenMovie: chosenMovie.movie,
+        chosenVideo: chosenMovie.videos[0]
       })
-    }
+
+    // apiCalls.selectMovie(id)
+    //   .then(data => {
+    //       this.setState({
+    //         chosenMovie: data.movie
+    //       })
+  })
+}
 
   displayAllMovies = (event) => {
     event.preventDefault();
@@ -45,6 +57,7 @@ class App extends Component {
         {this.state.chosenMovie &&
           <ChosenMovie
             movie={this.state.chosenMovie}
+            video={this.state.chosenVideo}
             displayAllMovies={this.displayAllMovies}
           />}
         {!this.state.chosenMovie &&
