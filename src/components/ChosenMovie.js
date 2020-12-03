@@ -30,7 +30,7 @@ const ChosenMovie = ({movie, video, displayAllMovies}) => {
         <p>Tagline: {movie.tagline}</p>
         </section>
         <section className="video-frame">
-          <iframe src={`https://youtube.com/embed/${video.key}`} height="400" width="700"></iframe>
+          <iframe className="video-container"src={`https://youtube.com/embed/${video.key}`} height="400" width="700"></iframe>
         </section>
       </section>
     </section>
