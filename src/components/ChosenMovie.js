@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/ChosenMovie.scss';
 
-const ChosenMovie = ({movie, displayAllMovies}) => {
+const ChosenMovie = ({movie, video, displayAllMovies}) => {
   let genres;
   //this is temp condition before fetch real data
   if (movie.genres) {
@@ -27,6 +27,9 @@ const ChosenMovie = ({movie, displayAllMovies}) => {
         <p>Revenue: ${movie.revenue}</p>
       </section>
       <p>Tagline: {movie.tagline}</p>
+      </section>
+      <section className="video-frame">
+        <iframe src={`https://youtube.com/embed/${video.key}`} height="200" width="300"></iframe>
       </section>
       <button onClick={displayAllMovies}>Go Back</button>
       </section>
