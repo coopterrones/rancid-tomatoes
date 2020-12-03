@@ -3,7 +3,7 @@ import '../styles/MovieCard.scss';
 
 const MovieCard = (props) => {
   const {id, title, avgRating, releaseDate, posterImg, handleClick} = props;
-  
+
   return (
     <section className='movie-card'id={id} onClick={() => {handleClick(id)}}>
       <section>

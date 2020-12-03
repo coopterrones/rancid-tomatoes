@@ -12,29 +12,24 @@ const ChosenMovie = ({movie, displayAllMovies}) => {
 
   return (
     <section className='chosen-movie'>
-      <section className='backdrop-img'>
-        <img src={movie.backdrop_path} alt={movie.title}/>
-      </section>
-      <section>
+      <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
+      <section className="where-r-u">
         <h3>{movie.title}</h3>
-        <section className='numeric-info'>
-          <p>Rating: {movie.average_rating.toFixed(1)}</p>
-          <p>Runtime: {movie.runtime}</p>
-          <p>Release Date: {movie.release_date}</p>
-        </section>
-        
-        <p>Overview: {movie.overview}</p>
-
-        <section className='genre'>{genres}</section>
-        <section className='monetary-info'>
-          <p>Budget: ${movie.budget}</p>
-          <p>Revenue: ${movie.revenue}</p>
-        </section>
-        
-        
-        <p>Tagline: {movie.tagline}</p>
+      <section className='numeric-info'>
+        <p>Rating: {movie.average_rating.toFixed(1)}</p>
+        <p>Runtime: {movie.runtime}</p>
+        <p>Release Date: {movie.release_date}</p>
+      </section>
+      <p>Overview: {movie.overview}</p>
+      <section className='genre'>{genres}</section>
+      <section className='monetary-info'>
+        <p>Budget: ${movie.budget}</p>
+        <p>Revenue: ${movie.revenue}</p>
+      </section>
+      <p>Tagline: {movie.tagline}</p>
       </section>
       <button onClick={displayAllMovies}>Go Back</button>
+      </section>
     </section>
   )
 }
