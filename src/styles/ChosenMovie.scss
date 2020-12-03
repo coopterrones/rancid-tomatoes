@@ -1,4 +1,7 @@
 .backdrop-img {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -23,7 +26,7 @@
   align-items: flex-start;
 }
 
-.where-r-u {
+.movie-info {
   padding: 5%;
   display: flex;
   flex-direction: column;
@@ -41,4 +44,8 @@
 .monetary-info {
   display: flex;
   justify-content: space-around;
+}
+
+.video-container {
+  border-style: none;
 }
