@@ -16,11 +16,11 @@ describe('MovieCard Component', () => {
 
     //screen.debug()
     const movieTitle = screen.getByText('Inside out');
-    //const movieReleaseDate= screen.getAllByText('Release Date: 2018-06-24');
+    const movieReleaseDate= screen.getByText('Release Date: 2018-06-24');
     const moviePoster = screen.getByRole('img');
 
     expect(movieTitle).toBeInTheDocument()
-    //expect(movieReleaseDate).toBeInTheDocument()
+    expect(movieReleaseDate).toBeInTheDocument()
     expect(moviePoster).toBeInTheDocument()
   })
 
