@@ -2,14 +2,8 @@ import React from 'react';
 import '../styles/ChosenMovie.scss';
 
 const ChosenMovie = ({movie, video, displayAllMovies}) => {
-  let genres;
-  //this is temp condition before fetch real data
-  if (movie.genres) {
-    genres = movie.genres.map(genre => <p key={genre}>{genre} </p>) ;
-  } else {
-    genres = []
-  }
-
+  let genres = movie.genres.map(genre => <p key={genre}>{genre} </p>) 
+ 
   return (
     <section className='chosen-movie'>
       <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
