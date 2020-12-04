@@ -13,8 +13,7 @@ describe('MovieCard Component', () => {
       posterImg={'https://123.test'}
       handleClick={jest.fn()}
     />)
-
-    //screen.debug()
+    
     const movieTitle = screen.getByText('Inside out');
     const movieReleaseDate= screen.getByText('Release Date: 2018-06-24');
     const moviePoster = screen.getByRole('img');
