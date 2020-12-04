@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import movieData from './components/movieData';
 import Movies from './components/Movies';
 import ChosenMovie from './components/ChosenMovie';
 import {apiCalls} from './apiCalls';
@@ -11,7 +10,8 @@ class App extends Component {
     this.state = {
       movies: [],
       chosenMovie: null,
-      chosenVideo: null
+      chosenVideo: null,
+      error: ''
     }
   }
 
@@ -19,9 +19,12 @@ class App extends Component {
     apiCalls.allMovies()
       .then(data => {
           this.setState({
-              movies: data.movies
+            movies: data.movies
           })
-      })
+        })
+      .catch(err => this.setState({
+        error: err
+      }))
   }
 
   handleClick = (id) => {
@@ -47,6 +50,8 @@ class App extends Component {
   render() {
     return (
       <main className='App'>
+        {this.state.error && 
+        <p>Sorry the page is not valid, please try again!</p>}
         {this.state.chosenMovie &&
           <ChosenMovie
             movie={this.state.chosenMovie}
