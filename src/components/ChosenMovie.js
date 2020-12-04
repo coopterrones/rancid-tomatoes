@@ -5,7 +5,7 @@ const ChosenMovie = ({movie, video, displayAllMovies}) => {
   let genres = movie.genres.map(genre => <p key={genre}>{genre} </p>) 
  
   return (
-    <section className='chosen-movie'>
+    <section className='chosen-movie' data-testid='chosen-movie'>
       <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
         <button onClick={displayAllMovies}>Go Back</button>
         <section className="movie-info">
@@ -15,8 +15,8 @@ const ChosenMovie = ({movie, video, displayAllMovies}) => {
           <p>Runtime: {movie.runtime}</p>
           <p>Release Date: {movie.release_date}</p>
         </section>
-        <p>Overview: {movie.overview}</p>
-        <section className='genre'>{genres}</section>
+        <p data-testid='overview'>Overview: {movie.overview}</p>
+        <section className='genre' data-testid='genre'>{genres}</section>
         <section className='monetary-info'>
           <p>Budget: ${movie.budget}</p>
           <p>Revenue: ${movie.revenue}</p>
