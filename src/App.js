@@ -27,7 +27,6 @@ class App extends Component {
   handleClick = (id) => {
     Promise.all([apiCalls.selectMovie(id), apiCalls.selectVideo(id)])
       .then(data => {
-        console.log(data)
         const chosenMovie = data.reduce((chosenMovieData, eachDataset) => {
           return chosenMovieData = {...chosenMovieData, ...eachDataset}
         }, {});
@@ -35,14 +34,8 @@ class App extends Component {
         chosenMovie: chosenMovie.movie,
         chosenVideo: chosenMovie.videos[0]
       })
-
-    // apiCalls.selectMovie(id)
-    //   .then(data => {
-    //       this.setState({
-    //         chosenMovie: data.movie
-    //       })
-  })
-}
+    })
+  }
 
   displayAllMovies = (event) => {
     event.preventDefault();
