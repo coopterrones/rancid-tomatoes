@@ -9,7 +9,7 @@ const ChosenMovie = ({movie, video, displayAllMovies}) => {
     <section className='chosen-movie' data-testid='chosen-movie'>
       <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
         <section className="movie-info">
-          <img className="back-button-icon" src={backButton} onClick={displayAllMovies}/>
+          <img data-testid='return-btn' className="back-button-icon" src={backButton} onClick={displayAllMovies}/>
           <h3>{movie.title}</h3>
         <section className='numeric-info'>
           <p>Rating: {movie.average_rating.toFixed(1)}</p>

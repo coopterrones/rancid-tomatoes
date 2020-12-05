@@ -5,9 +5,9 @@ import ChosenMovie from '../components/ChosenMovie';
 describe('ChosenMovie Component', () => {
   it('should render correctly', () => {
     render(
-      <ChosenMovie 
+      <ChosenMovie
         movie={{
-          id: 694919, 
+          id: 694919,
           title:"Money Plane",
           poster_path:"https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
           backdrop_path:"https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
@@ -17,7 +17,7 @@ describe('ChosenMovie Component', () => {
           budget:0,
           revenue:0,
           runtime:82,
-          tagline:"great movie", 
+          tagline:"great movie",
           average_rating:7
         }}
         video={'trailer'}
@@ -27,7 +27,7 @@ describe('ChosenMovie Component', () => {
 
     const title = screen.getByText('Money Plane');
     const releaseDate= screen.getByText('Release Date: 2020-09-29');
-    const returnBtn = screen.getByRole('button');
+    const returnBtn = screen.getByRole('img');
     const overView = screen.getByTestId('overview');
     const genre = screen.getByTestId('genre');
     const budget = screen.getByText('Budget: $0');
@@ -35,7 +35,7 @@ describe('ChosenMovie Component', () => {
     const runTime = screen.getByText('Runtime: 82');
     const tagline = screen.getByText('Tagline: great movie');
     const rating = screen.getByText('Rating: 7.0');
-    
+
 
     expect(title).toBeInTheDocument();
     expect(releaseDate).toBeInTheDocument();
@@ -52,9 +52,9 @@ describe('ChosenMovie Component', () => {
   it('should call displayAllMovies function when click return button', () => {
     const returnMain = jest.fn()
     render(
-      <ChosenMovie 
+      <ChosenMovie
         movie={{
-          id: 123456, 
+          id: 123456,
           title:'Money Plane',
           poster_path:'https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg',
           backdrop_path:'https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg',
@@ -64,7 +64,7 @@ describe('ChosenMovie Component', () => {
           budget:1,
           revenue:20,
           runtime:2,
-          tagline:'test', 
+          tagline:'test',
           average_rating:7
         }}
         video={'trailer'}
@@ -72,7 +72,7 @@ describe('ChosenMovie Component', () => {
       />
     )
 
-    const returnBtn = screen.getByText('Go Back')
+    const returnBtn = screen.getByTestId('return-btn')
 
     fireEvent.click(returnBtn)
 

@@ -12,6 +12,7 @@ const MovieCard = (props) => {
       <section>
         <h3>{title}</h3>
         <p>Rating: {avgRating}</p>
+        <p>Release Date: {releaseDate}</p>
       </section>
     </section>
   )
