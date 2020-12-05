@@ -1,28 +1,23 @@
 import React from 'react';
 import '../styles/ChosenMovie.scss';
+import backButton from '../assets/back-button.svg';
 
 const ChosenMovie = ({movie, video, displayAllMovies}) => {
-  let genres;
-  //this is temp condition before fetch real data
-  if (movie.genres) {
-    genres = movie.genres.map(genre => <p key={genre}>{genre} </p>) ;
-  } else {
-    genres = []
-  }
+  let genres = movie.genres.map(genre => <p key={genre}>{genre} </p>)
 
   return (
-    <section className='chosen-movie'>
+    <section className='chosen-movie' data-testid='chosen-movie'>
       <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
-        <button onClick={displayAllMovies}>Go Back</button>
         <section className="movie-info">
+          <img data-testid='return-btn' className="back-button-icon" src={backButton} onClick={displayAllMovies}/>
           <h3>{movie.title}</h3>
         <section className='numeric-info'>
           <p>Rating: {movie.average_rating.toFixed(1)}</p>
           <p>Runtime: {movie.runtime}</p>
           <p>Release Date: {movie.release_date}</p>
         </section>
-        <p>Overview: {movie.overview}</p>
-        <section className='genre'>{genres}</section>
+        <p data-testid='overview'>Overview: {movie.overview}</p>
+        <section className='genre' data-testid='genre'>{genres}</section>
         <section className='monetary-info'>
           <p>Budget: ${movie.budget}</p>
           <p>Revenue: ${movie.revenue}</p>

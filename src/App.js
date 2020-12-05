@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import movieData from './components/movieData';
 import Movies from './components/Movies';
 import ChosenMovie from './components/ChosenMovie';
 import {apiCalls} from './apiCalls';
@@ -11,7 +10,8 @@ class App extends Component {
     this.state = {
       movies: [],
       chosenMovie: null,
-      chosenVideo: null
+      chosenVideo: null,
+      error: ''
     }
   }
 
@@ -19,15 +19,17 @@ class App extends Component {
     apiCalls.allMovies()
       .then(data => {
           this.setState({
-              movies: data.movies
+            movies: data.movies
           })
-      })
+        })
+      .catch(err => this.setState({
+        error: err
+      }))
   }
 
   handleClick = (id) => {
     Promise.all([apiCalls.selectMovie(id), apiCalls.selectVideo(id)])
       .then(data => {
-        console.log(data)
         const chosenMovie = data.reduce((chosenMovieData, eachDataset) => {
           return chosenMovieData = {...chosenMovieData, ...eachDataset}
         }, {});
@@ -35,14 +37,8 @@ class App extends Component {
         chosenMovie: chosenMovie.movie,
         chosenVideo: chosenMovie.videos[0]
       })
-
-    // apiCalls.selectMovie(id)
-    //   .then(data => {
-    //       this.setState({
-    //         chosenMovie: data.movie
-    //       })
-  })
-}
+    })
+  }
 
   displayAllMovies = (event) => {
     event.preventDefault();
@@ -54,6 +50,8 @@ class App extends Component {
   render() {
     return (
       <main className='App'>
+        {this.state.error && 
+        <p>Sorry the page is not valid, please try again!</p>}
         {this.state.chosenMovie &&
           <ChosenMovie
             movie={this.state.chosenMovie}
