@@ -1,14 +1,15 @@
 import React from 'react';
 import '../styles/ChosenMovie.scss';
+import backButton from '../assets/back-button.svg';
 
 const ChosenMovie = ({movie, video, displayAllMovies}) => {
-  let genres = movie.genres.map(genre => <p key={genre}>{genre} </p>) 
- 
+  let genres = movie.genres.map(genre => <p key={genre}>{genre} </p>)
+
   return (
     <section className='chosen-movie' data-testid='chosen-movie'>
       <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
-        <button onClick={displayAllMovies}>Go Back</button>
         <section className="movie-info">
+          <img className="back-button-icon" src={backButton} onClick={displayAllMovies}/>
           <h3>{movie.title}</h3>
         <section className='numeric-info'>
           <p>Rating: {movie.average_rating.toFixed(1)}</p>

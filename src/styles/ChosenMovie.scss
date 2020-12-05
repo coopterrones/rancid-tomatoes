@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-around;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -19,15 +20,23 @@
 .chosen-movie {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5em;
-  color: #FFFFFF;
+  color: #FDFFFC;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
 }
 
+.back-button-icon {
+  margin-left: -10px;
+  height: 55px;
+  width: 55px;
+  filter: brightness(0) invert(1);
+}
+
 .movie-info {
-  padding: 5%;
+  height: 85vh;
+  padding: 3%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
