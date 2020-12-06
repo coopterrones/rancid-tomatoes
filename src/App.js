@@ -50,7 +50,7 @@ class App extends Component {
   render() {
     return (
       <main className='App'>
-        {this.state.error && 
+        {this.state.error &&
         <p>Sorry the page is not valid, please try again!</p>}
         {this.state.chosenMovie &&
           <ChosenMovie
