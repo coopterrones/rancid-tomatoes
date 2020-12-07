@@ -40,6 +40,10 @@ class App extends Component {
     })
   }
 
+  animation = (id) => {
+    
+  }
+
   displayAllMovies = (event) => {
     event.preventDefault();
     this.setState({

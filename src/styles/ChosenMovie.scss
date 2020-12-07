@@ -19,7 +19,7 @@
 
 .chosen-movie {
   font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5em;
+  font-size: 1.10em;
   color: #FDFFFC;
   display: flex;
   flex-direction: column;
@@ -32,6 +32,13 @@
   height: 55px;
   width: 55px;
   filter: brightness(0) invert(1);
+  &:hover {
+    transform: scale(1.15);
+    cursor: pointer;
+  }
+  &:active {
+    transform: scale(.90);
+  }
 }
 
 .movie-info {
@@ -40,21 +47,59 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   width: 35vw;
   text-align: left;
+  overflow: scroll;
+}
+
+.rating-star {
+  height: 1.25em;
+  width: 1.25em;
+  filter: invert(91%) sepia(22%) saturate(6764%) hue-rotate(5deg) brightness(101%) contrast(104%);
+}
+
+.runtime-reel {
+  padding-top: .5em;
+  height: 2em;
+  width: 2em;
+  filter: invert(71%) sepia(48%) saturate(3097%) hue-rotate(67deg) brightness(91%) contrast(83%);
 }
 
 .numeric-info {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .genre,
 .monetary-info {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .video-container {
   border-style: none;
+}
+
+.rating-text,
+.runtime-text {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating-text,
+.runtime-text,
+.release-date-text,
+.overview-text,
+.budget-text,
+.revenue-text {
+  margin: 0;
 }
