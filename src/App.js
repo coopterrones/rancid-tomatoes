@@ -10,8 +10,6 @@ class App extends Component {
     super();
     this.state = {
       movies: [],
-      // chosenMovie: null,
-      // chosenVideo: null,
       error: '',
       loaded: false
     }
@@ -34,7 +32,7 @@ class App extends Component {
     return (
       <main className='App'>
         {this.state.error && <p>{this.state.error}</p>}
-        {!this.state.loaded && <p>Loading page...</p>}
+        {!this.state.loaded && <p className='app-loading-screen'>Loading page...</p>}
 
         <Route path='/' exact render={ () =>
           <Movies movies={this.state.movies} />
