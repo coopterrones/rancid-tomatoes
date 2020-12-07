@@ -2,7 +2,7 @@ import React from 'react';
 import MovieCard from './MovieCard';
 import '../styles/Movie.scss';
 
-const Movies = ({movies, handleClick}) => {
+const Movies = ({movies}) => {
   const movieCards = movies.map((movie) => {
     return (
       <MovieCard
@@ -12,7 +12,6 @@ const Movies = ({movies, handleClick}) => {
         releaseDate={movie.release_date}
         posterImg={movie.poster_path}
         key={movie.id}
-        handleClick={handleClick}
       />
     )
   })
