@@ -17,6 +17,10 @@ class ChosenMovie extends Component {
   }
  
   componentDidMount() {
+    this.getChosenMovieData();
+  }
+
+  getChosenMovieData = () => {
     const { id } = this.props.match.params;
     return Promise.all([apiCalls.selectMovie(id), apiCalls.selectVideo(id)])
       .then(data => {

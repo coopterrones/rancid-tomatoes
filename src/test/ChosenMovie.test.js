@@ -1,41 +1,57 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ChosenMovie from '../components/ChosenMovie';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
+import { _movieId, _movie, _video} from '../test/mockData/chosenMovieMockData';
+import { apiCalls } from '../apiCalls';
+jest.mock('../apiCalls')
 
 describe('ChosenMovie Component', () => {
-  it('should render correctly', () => {
-    render(
-      <ChosenMovie
-        movie={{
-          id: 694919,
-          title:"Money Plane",
-          poster_path:"https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
-          backdrop_path:"https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg",
-          release_date:"2020-09-29",
-          overview:"A professional thief with $40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
-          genres:["Action"],
-          budget:0,
-          revenue:0,
-          runtime:82,
-          tagline:"great movie",
-          average_rating:7
-        }}
-        video={'trailer'}
-        displayAllMovies={jest.fn()}
-      />
-    )
+  beforeEach(() => {
+    apiCalls.selectMovie.mockResolvedValueOnce(_movie);
+    apiCalls.selectVideo.mockResolvedValueOnce(_video);
 
-    const title = screen.getByText('Money Plane');
-    const releaseDate= screen.getByText('Release Date: 2020-09-29');
-    const returnBtn = screen.getByRole('img');
-    const overView = screen.getByTestId('overview');
-    const genre = screen.getByTestId('genre');
-    const budget = screen.getByText('Budget: $0');
-    const revenue = screen.getByText('Revenue: $0');
-    const runTime = screen.getByText('Runtime: 82');
-    const tagline = screen.getByText('Tagline: great movie');
-    const rating = screen.getByText('Rating: 7.0');
+    // render(<ChosenMovie match={_movieId}/>, {wrapper: MemoryRouter})
+  })
 
+  it('should display loading', () => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
+
+    const loadingScreen = screen.getByText('Loading...');
+
+    expect(loadingScreen).toBeInTheDocument();
+  })
+
+  it('should call selectMovie', () => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
+
+    expect(apiCalls.selectMovie).toHaveBeenCalledTimes(1);
+  })
+
+  it('should call selectVideo', () => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
+
+    expect(apiCalls.selectVideo).toHaveBeenCalledTimes(1);
+  })
+
+  it('should render correctly', async() => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
+
+    const title = await waitFor(() => screen.getByText('Mulan'));
+    const releaseDate= await waitFor(() => screen.getByText('Release Date: 2020-09-04'));
+    const returnBtn = await waitFor(() => screen.getByRole('img'));
+    const overView = await waitFor(() => screen.getByTestId('overview'));
+    const genre = await waitFor(() => screen.getByTestId('genre'));
+    const budget = await waitFor(() => screen.getByText('Budget: $200000000'));
+    const revenue = await waitFor(() => screen.getByText('Revenue: $57000000'));
+    const runTime = await waitFor(() => screen.getByText('Runtime: 115'));
+    const tagline = await waitFor(() => screen.getByText('Tagline: this is a tagline'));
+    const rating = await waitFor(() => screen.getByText('Rating: 4.9'));
 
     expect(title).toBeInTheDocument();
     expect(releaseDate).toBeInTheDocument();
@@ -49,33 +65,13 @@ describe('ChosenMovie Component', () => {
     expect(rating).toBeInTheDocument();
   })
 
-  it('should call displayAllMovies function when click return button', () => {
-    const returnMain = jest.fn()
-    render(
-      <ChosenMovie
-        movie={{
-          id: 123456,
-          title:'Money Plane',
-          poster_path:'https://image.tmdb.org/t/p/original//6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg',
-          backdrop_path:'https://image.tmdb.org/t/p/original//pq0JSpwyT2URytdFG0euztQPAyR.jpg',
-          release_date:'2020-09-29',
-          overview:"A professional thief with $40 million in debt and his family’s life on the line must",
-          genres:['Action'],
-          budget:1,
-          revenue:20,
-          runtime:2,
-          tagline:'test',
-          average_rating:7
-        }}
-        video={'trailer'}
-        displayAllMovies={returnMain}
-      />
-    )
+  it('should return home page upon clicking back button', async() => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>);
 
-    const returnBtn = screen.getByTestId('return-btn')
-
-    fireEvent.click(returnBtn)
-
-    expect(returnMain).toHaveBeenCalled();
+    const returnBtn = await waitFor(() => screen.getByTestId('return-btn'));
+    fireEvent.click(returnBtn);
+ 
+    expect(history.location.pathname).toBe('/');
   })
 })

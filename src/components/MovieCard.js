@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/MovieCard.scss';
 import ratingStar from '../assets/rating-star.svg';
-import { NavLink } from 'react-router-dom';
 // import { Spring, Transition, animated } from 'react-spring/renderprops';
+import { Link } from 'react-router-dom';
 
 // export default class MovieCard extends Component {
 //   constructor({id, title, avgRating, releaseDate, posterImg}) {
@@ -39,7 +39,7 @@ import { NavLink } from 'react-router-dom';
 const MovieCard = (props) => {
   const {id, title, avgRating, releaseDate, posterImg} = props;
   return (
-    <NavLink to={`/movie/${id}`} className='movie-card'>
+    <Link to={`/movie/${id}`} className='movie-card'>
       <section data-testid={`movie-card-${id}`} id={id}>
         <section className='movie-img-container'>
           <img src={posterImg} className='poster-img' alt={title}/>
@@ -55,7 +55,7 @@ const MovieCard = (props) => {
           </section>
         </section>
       </section>
-    </NavLink>
+    </Link>
   )
 }
 

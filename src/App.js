@@ -16,16 +16,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getData();
+  }
+
+  getData = () => {
     apiCalls.allMovies()
-      .then(data => {
-          this.setState({
-            movies: data.movies,
-            loaded: true
-          })
+    .then(data => {
+        this.setState({
+          movies: data.movies,
+          loaded: true
         })
-      .catch(err => this.setState({
-        error: err.message
-      }))
+      })
+    .catch(err => this.setState({
+      error: err.message
+    }))
   }
 
   render() {
