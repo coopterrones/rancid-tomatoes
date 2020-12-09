@@ -1,7 +1,8 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ChosenMovie from '../components/ChosenMovie';
-import { MemoryRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { _movieId, _movie, _video} from '../test/mockData/chosenMovieMockData';
 import { apiCalls } from '../apiCalls';
 jest.mock('../apiCalls')
@@ -11,24 +12,36 @@ describe('ChosenMovie Component', () => {
     apiCalls.selectMovie.mockResolvedValueOnce(_movie);
     apiCalls.selectVideo.mockResolvedValueOnce(_video);
 
-    render(<ChosenMovie match={_movieId}/>, {wrapper: MemoryRouter})
+    // render(<ChosenMovie match={_movieId}/>, {wrapper: MemoryRouter})
   })
 
-  it('should not display loading', () => {
-    const loadingScreen = screen.queryByText('Loading...');
+  it('should display loading', () => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
 
-    expect(loadingScreen).not.toBeInTheDocument();
+    const loadingScreen = screen.getByText('Loading...');
+
+    expect(loadingScreen).toBeInTheDocument();
   })
 
   it('should call selectMovie', () => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
+
     expect(apiCalls.selectMovie).toHaveBeenCalledTimes(1);
   })
 
   it('should call selectVideo', () => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
+
     expect(apiCalls.selectVideo).toHaveBeenCalledTimes(1);
   })
 
   it('should render correctly', async() => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
+
     const title = await waitFor(() => screen.getByText('Mulan'));
     const releaseDate= await waitFor(() => screen.getByText('Release Date: 2020-09-04'));
     const returnBtn = await waitFor(() => screen.getByRole('img'));
@@ -50,5 +63,15 @@ describe('ChosenMovie Component', () => {
     expect(runTime).toBeInTheDocument();
     expect(tagline).toBeInTheDocument();
     expect(rating).toBeInTheDocument();
+  })
+
+  it('should return home page upon clicking back button', async() => {
+    const history = createMemoryHistory();
+    render(<Router history={history}><ChosenMovie match={_movieId} /></Router>);
+
+    const returnBtn = await waitFor(() => screen.getByTestId('return-btn'));
+    fireEvent.click(returnBtn);
+ 
+    expect(history.location.pathname).toBe('/');
   })
 })
