@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Movies from '../components/Movies';
+import { MemoryRouter} from 'react-router-dom'
 
 describe('Movies Component', () => {
   it('should render correctly', () => {
@@ -22,7 +23,7 @@ describe('Movies Component', () => {
           average_rating:10
         }
         ]}
-      />
+      />, {wrapper: MemoryRouter}
     )
 
     const title1 = screen.getByText('Money Plane');
