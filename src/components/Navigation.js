@@ -50,9 +50,9 @@ class Navigation extends Component{
   render() {
     const { getSortedMovies } = this.props;
     return (
-      <nav className="navBar">
-        <img className='logo' src={rancidTomato} alt='logo' height='50px' width='50px' onClick={() => getSortedMovies([])}/>   
-        <form onSubmit={this.handleSubmit}>
+      <nav className='navBar'>
+        <img className='logo' src={rancidTomato} alt='logo' height='25px' width='25px' onClick={() => getSortedMovies([])}/>   
+        <form onSubmit={this.handleSubmit} className='filterInputs'>
           <input type="submit" value={this.state.sorted ? "unsorted" : "sort by date"} onClick={this.handleClick}/>
           <br/>
           <label>
