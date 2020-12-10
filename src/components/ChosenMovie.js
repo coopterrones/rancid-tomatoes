@@ -6,7 +6,7 @@ import runtimeReel from '../assets/runtime-reel.svg';
 import { apiCalls } from '../apiCalls';
 import { Link } from 'react-router-dom';
 import { Spring } from 'react-spring/renderprops'
-import Loading from './Loading'
+import Loading from './Loading';
 
 class ChosenMovie extends Component {
   constructor() {
