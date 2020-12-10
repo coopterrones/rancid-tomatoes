@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/MovieCard.scss';
 import ratingStar from '../assets/rating-star.svg';
 import { Link } from 'react-router-dom';

@@ -35,10 +35,25 @@ class ChosenMovie extends Component {
       })
   }
 
+  formatDate = (movieReleaseDate) => {
+    const date = new Date(movieReleaseDate);
+    return date.toDateString().split(' ');
+  }
+
+  formatMonetaryInfo = (amount) => {
+    const formattedAmount = amount / 1000000;
+    if (amount % 1000000) {
+      return formattedAmount.toFixed(2);
+    } else {
+      return formattedAmount;
+    }
+  }
+
   render() {  
     if(this.state.movie) {
       const { movie, video } = this.state;
       const genres = movie.genres.map(genre => <p key={genre}>{genre} </p>)
+      const releaseDate = this.formatDate(movie.release_date);
       return (
         <section className='chosen-movie' data-testid='chosen-movie'>
         <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
@@ -50,13 +65,13 @@ class ChosenMovie extends Component {
           <section className='numeric-info'>
             <p className='rating-text'><img className='rating-star' src={ratingStar} alt='rating-star-icon'/> {movie.average_rating.toFixed(1)}</p>
             <p className='runtime-text'><img className='runtime-reel' src={runtimeReel} alt='runtime-reel-icon'/>{movie.runtime}min.</p>
-            <p className='release-date-text'>{movie.release_date}</p>
+            <p className='release-date-text-chosen'>{releaseDate[1]} {releaseDate[2]}, {releaseDate[3]}</p>
           </section>
           <p className='overview-text' data-testid='overview'>Overview: {movie.overview}</p>
           <section className='genre' data-testid='genre'>{genres}</section>
           <section className='monetary-info'>
-            <p className='budget-text'>Budget: ${movie.budget}</p>
-            <p className='revenue-text'>Revenue: ${movie.revenue}</p>
+            <p className='budget-text'>Budget: ${this.formatMonetaryInfo(movie.budget)}M</p>
+            <p className='revenue-text'>Revenue: ${this.formatMonetaryInfo(movie.revenue)}M</p>
           </section>
           <p>Tagline: {movie.tagline}</p>
           </section>

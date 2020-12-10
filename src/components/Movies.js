@@ -5,7 +5,7 @@ import '../styles/Movie.scss';
 const Movies = ({movies}) => {
   const movieCards = movies.map((movie) => {
     const date = new Date(movie.release_date);
-      const formattedDate = date.toDateString().split(' ');
+    const formattedDate = date.toDateString().split(' ');
     return (
       <MovieCard
         id={movie.id}
