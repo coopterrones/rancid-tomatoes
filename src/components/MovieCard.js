@@ -18,7 +18,7 @@ const MovieCard = (props) => {
             <p className='average-rating-text'>{avgRating}</p>
           </section>
           <section className='realease-date-container'>
-            <p className='release-date-text'>{releaseDate[0]} {releaseDate[1]}, {releaseDate[2]} </p>
+            <p className='release-date-text'>{releaseDate[1]} {releaseDate[2]}, {releaseDate[3]} </p>
           </section>
         </section>
       </section>

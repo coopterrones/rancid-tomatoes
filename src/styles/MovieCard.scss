@@ -2,40 +2,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   height: 35vh;
   width: 15vw;
   margin: 5vh 5vw 5vh 5vw;
-  color: #FFFFFF;
+  color: #ffffff;
   background-color: #1f1f1f;
+  text-decoration: none;
   &:hover {
     cursor: pointer;
   }
-  // &:active {
-  //   -webkit-animation: slide-out-fwd-center 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-  //           animation: slide-out-fwd-center 0.2s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-  // }
 }
 
-// @keyframes movie-card {
-//   0% {
-//     -webkit-transform: translateZ(1);
-//             transform: translateZ(1);
-//     opacity: 1;
-//   }
-//   100% {
-//     -webkit-transform: translateZ(600px);
-//             transform: translateZ(600px);
-//     opacity: 0;
-//   }
-// }
-
 .poster-img {
-  padding: .5em;
+  padding: 0.5em;
   max-height: 30vh;
   max-width: 25vw;
   border-radius: 5%;
-  &:hover{
+  &:hover {
     transform: scale(1.05);
     opacity: 65%;
     box-shadow: black;
@@ -45,15 +29,12 @@
   }
 }
 
-.movie-card-title {
-  margin: 1%;
-}
-
-.rating-star-movie-card{
-  padding-top: .2em;
+.rating-star-movie-card {
+  padding-top: 0.2em;
   height: 1.25em;
   width: 1.25em;
-  filter: invert(91%) sepia(22%) saturate(6764%) hue-rotate(5deg) brightness(101%) contrast(104%);
+  filter: invert(91%) sepia(22%) saturate(6764%) hue-rotate(5deg)
+    brightness(101%) contrast(104%);
 }
 
 .average-rating-container {
@@ -63,7 +44,11 @@
   align-items: center;
 }
 
+.movie-card-title,
 .average-rating-text,
 .release-date-text {
   margin: 1.25%;
+  &:hover {
+    transform: scale(1.25);
+  }
 }
