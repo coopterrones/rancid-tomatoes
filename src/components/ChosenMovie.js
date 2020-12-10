@@ -6,6 +6,7 @@ import runtimeReel from '../assets/runtime-reel.svg';
 import { apiCalls } from '../apiCalls';
 import { Link } from 'react-router-dom';
 import { Spring, Transition } from 'react-spring/renderprops'
+import Loading from './Loading'
 
 class ChosenMovie extends Component {
   constructor() {
@@ -74,7 +75,7 @@ class ChosenMovie extends Component {
         </section>
       )
    } else {
-    return (<p className='chosen-movie-loading-screen'>Loading... </p>)
+    return (<Loading/>)
    }
   }
 }

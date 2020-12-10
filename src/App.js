@@ -4,6 +4,7 @@ import Movies from './components/Movies';
 import ChosenMovie from './components/ChosenMovie';
 import {apiCalls} from './apiCalls';
 import { Route } from 'react-router-dom';
+import Loading from './components/Loading';
 
 class App extends Component {
   constructor() {
@@ -36,7 +37,7 @@ class App extends Component {
     return (
       <main className='App'>
         {this.state.error && <p>{this.state.error}</p>}
-        {!this.state.loaded && <p className='app-loading-screen'>Loading page...</p>}
+        {!this.state.loaded && <Loading/> }
 
         <Route path='/' exact render={ () =>
           <Movies movies={this.state.movies} />
