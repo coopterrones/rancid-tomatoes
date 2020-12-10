@@ -19,6 +19,7 @@
   max-height: 30vh;
   max-width: 25vw;
   border-radius: 5%;
+  transition: transform 0.3s, opacity 0.3s, box-shadow 0.3s;
   &:hover {
     transform: scale(1.05);
     opacity: 65%;
@@ -48,6 +49,7 @@
 .average-rating-text,
 .release-date-text {
   margin: 1.25%;
+  transition: transform 0.3s;
   &:hover {
     transform: scale(1.25);
   }
