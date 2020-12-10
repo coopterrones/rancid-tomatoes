@@ -12,6 +12,7 @@ class App extends Component {
     super();
     this.state = {
       movies: [],
+      queries: [],
       error: '',
       loaded: false
     }
@@ -34,16 +35,27 @@ class App extends Component {
     }))
   }
 
+  getSortedMovies = (sortedMovies) => {
+    this.setState({
+      queries: sortedMovies
+    })
+  }
+
   render() {
+    const { movies, queries, error, loaded } = this.state;
+    const displayMovies = queries.length ? queries : movies;
     return (
       <main className='App'>
-        {this.state.error && <p>{this.state.error}</p>}
-        {!this.state.loaded && <Loading/> }
-        <Navigation />
-        <Route path='/' exact render={ () =>
-          <Movies movies={this.state.movies} />
-        }
-        />
+        {error && <p>{error}</p>}
+        {!loaded && <Loading/> }
+        <Route path='/' exact 
+        render={() => 
+          <Navigation movies={displayMovies} getSortedMovies={this.getSortedMovies}/> 
+        }/>
+
+        <Route path='/' exact 
+          render={ () => <Movies movies={displayMovies} />
+        }/>
         
         <Route path='/movie/:id' component={ ChosenMovie } /> 
       </main>
