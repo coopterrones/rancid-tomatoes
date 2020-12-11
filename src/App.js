@@ -3,9 +3,10 @@ import './App.css';
 import Movies from './components/Movies';
 import ChosenMovie from './components/ChosenMovie';
 import {apiCalls} from './apiCalls';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Loading from './components/Loading';
 import Navigation from './components/Navigation';
+import Error from './components/Error';
 
 class App extends Component {
   constructor() {
@@ -46,21 +47,22 @@ class App extends Component {
     const displayMovies = queries.length ? queries : movies;
     return (
       <main className='App'>
-        {error && <p>{error}</p>}
+        {error && <Error />}
         {!loaded && <Loading/> }
-        <Route path='/' exact 
-        render={() => 
-          <Navigation movies={displayMovies} getSortedMovies={this.getSortedMovies}/> 
-        }/>
+          <Route path='/' exact 
+            render={() => 
+              <Navigation movies={displayMovies} getSortedMovies={this.getSortedMovies}/> 
+          }/>
 
-        <Route path='/' exact 
-          render={ () => <Movies movies={displayMovies} />
-        }/>
-        
-        <Route path='/movie/:id' component={ ChosenMovie } /> 
+          <Route path='/' exact 
+            render={ () => <Movies movies={displayMovies} />
+          }/>
+          
+          <Route path='/movie/:id' component={ ChosenMovie } /> 
       </main>
     )
   }
 }
 
 export default App;
+
