@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-// import { NavLink, Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import rancidTomato from '../assets/rancidTomatillo.png';
 import '../styles/Navigation.scss';
 
-class Navigation extends Component{
+class Navigation extends Component {
   constructor() {
     super();
     this.state = {
@@ -14,18 +13,18 @@ class Navigation extends Component{
 
   handleClick = (event) => {
     event.preventDefault();
-    const { movies, getSortedMovies } = this.props;    
-    if(!this.state.sorted) {
+    const { movies, getSortedMovies } = this.props;
+    if (!this.state.sorted) {
       movies.sort((a, b) => {
         return parseInt(a.release_date) - parseInt(b.release_date)
-      })  
+      })
     } else {
       movies.sort((b, a) => {
         return parseInt(a.release_date) - parseInt(b.release_date)
-      })  
+      })
     }
     this.setState((prevState) => {
-      return {sorted: !prevState.sorted}
+      return { sorted: !prevState.sorted }
     })
     getSortedMovies(movies)
   }
@@ -52,21 +51,21 @@ class Navigation extends Component{
     return (
       <nav className='nav-bar'>
         <section className="nav-top">
-          <img className='logo' src={rancidTomato} alt='logo' height='35px' width='35px' onClick={() => getSortedMovies([])}/> 
+          <img className='logo' src={rancidTomato} alt='logo' height='35px' width='35px' onClick={() => getSortedMovies([])} />
           <form onSubmit={this.handleSubmit} className='filter-inputs'>
             <label>
-              <input className="search-input" placeholder="MOVIE NAME" name="search" value={this.state.search} onChange={this.handleOnChange}/>
+              <input className="search-input" placeholder="MOVIE NAME" name="search" value={this.state.search} onChange={this.handleOnChange} />
             </label>
-            <input className="search-button" type="submit" value='search'/>
-          </form>          
+            <input className="search-button" type="submit" value='search' />
+          </form>
         </section>
         <section className="nav-bottom">
-          <button className='sort-button' onClick={this.handleClick}>{this.state.sorted ? "All Movies" : "Recent Releases"}</button> 
+          <button className='sort-button' onClick={this.handleClick}>{this.state.sorted ? "All Movies" : "Recent Releases"}</button>
         </section>
       </nav>
 
     )
   }
-} 
+}
 
 export default Navigation;
