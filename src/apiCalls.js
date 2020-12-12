@@ -9,7 +9,7 @@ const getData = (path) => {
     })
 }
 
-const getWatchList = (path, action, id) => {
+const updateData = (path, action, id) => {
   return fetch(path, {
     method: action,
     headers: {
@@ -39,7 +39,11 @@ export const apiCalls = {
     return getData(`https://rancid-tomatillos.herokuapp.com/api/v2//movies/${id}/videos`)
   },
 
+  getWatchList: () => {
+    return getData("https://rancid-tomatillos-server-tl.herokuapp.com/watch-list")
+  },
+
   addToWatchList: (id) => {
-    return getWatchList("http://localhost:3001/watch-list", 'POST', id)
+    return updateData("https://rancid-tomatillos-server-tl.herokuapp.com/watch-list", 'POST', id)
   }
 }
