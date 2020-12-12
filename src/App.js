@@ -30,8 +30,21 @@ class App extends Component {
         const newDataSet = data.reduce((allData, dataSet) => {
           return allData = { ...allData, ...dataSet }
         }, {})
+        const updateMovies = newDataSet.movies.map(movie => {
+          if (newDataSet.watchListIds.length) {
+            return newDataSet.watchListIds.reduce((movieData, id) => {
+              if (movie.id === id) {
+                return movieData = { ...movie, onWatchList: true }
+              } else {
+                return movieData = { ...movie, onWatchList: false }
+              }
+            }, {})
+          } else {
+            return { ...movie, onWatchList: false }
+          }
+        })
         this.setState({
-          movies: newDataSet.movies,
+          movies: updateMovies,
           watchList: newDataSet.watchListIds,
           loaded: true
         })
@@ -49,6 +62,21 @@ class App extends Component {
 
   addToWatchList = (id) => {
     apiCalls.addToWatchList(id);
+    this.updateWatchStatus(id);
+  }
+
+  updateWatchStatus = (id) => {
+    const movies = [...this.state.movies]
+    const updateMovies = movies.map(movie => {
+      if (movie.id === id) {
+        return { ...movie, onWatchList: !movie.onWatchList }
+      } else {
+        return movie
+      }
+    })
+    this.setState({
+      movies: updateMovies
+    })
   }
 
   render() {
