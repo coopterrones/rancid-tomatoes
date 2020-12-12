@@ -14,6 +14,7 @@ class App extends Component {
     this.state = {
       movies: [],
       queries: [],
+      watchList: [],
       error: '',
       loaded: false
     }
@@ -24,10 +25,14 @@ class App extends Component {
   }
 
   getData = () => {
-    apiCalls.allMovies()
+    Promise.all([apiCalls.allMovies(), apiCalls.getWatchList()])
       .then(data => {
+        const newDataSet = data.reduce((allData, dataSet) => {
+          return allData = { ...allData, ...dataSet }
+        }, {})
         this.setState({
-          movies: data.movies,
+          movies: newDataSet.movies,
+          watchList: newDataSet.watchListIds,
           loaded: true
         })
       })
