@@ -11,8 +11,11 @@
   text-decoration: none;
 }
 
-.movie-img-container:hover {
+.movie-img-container {
+  transition: cursor 0.3s;
+  &:hover {
   cursor: pointer;
+  }
 }
 
 .poster-img {
@@ -38,9 +41,13 @@
   width: 1.25em;
   filter: invert(91%) sepia(22%) saturate(6764%) hue-rotate(5deg)
     brightness(101%) contrast(104%);
+  transition: cursor 0.3s;
   &:hover {
     cursor: pointer;
   }
+}
+.add-to-watch-list {
+  margin: -6.75% 0.1em;
 }
 
 .average-rating-container {
