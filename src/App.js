@@ -25,24 +25,25 @@ class App extends Component {
   }
 
   getData = () => {
+    let updateMovies;
     Promise.all([apiCalls.allMovies(), apiCalls.getWatchList()])
       .then(data => {
         const newDataSet = data.reduce((allData, dataSet) => {
           return allData = { ...allData, ...dataSet }
         }, {})
-        const updateMovies = newDataSet.movies.map(movie => {
-          if (newDataSet.watchListIds.length) {
-            return newDataSet.watchListIds.reduce((movieData, id) => {
-              if (movie.id === id) {
-                return movieData = { ...movie, onWatchList: true }
-              } else {
-                return movieData = { ...movie, onWatchList: false }
-              }
-            }, {})
-          } else {
+        if (newDataSet.watchListIds.length) {
+          updateMovies = newDataSet.movies.map(movie => {
+            if (newDataSet.watchListIds.includes(movie.id)) {
+              return { ...movie, onWatchList: true }
+            } else {
+              return { ...movie, onWatchList: false }
+            }
+          })
+        } else {
+          updateMovies = newDataSet.movies.map(movie => {
             return { ...movie, onWatchList: false }
-          }
-        })
+          })
+        }
         this.setState({
           movies: updateMovies,
           watchList: newDataSet.watchListIds,
@@ -79,9 +80,13 @@ class App extends Component {
         return movie
       }
     })
-    this.setState({
-      movies: updateMovies
-    })
+    apiCalls.getWatchList()
+      .then(data => {
+        this.setState({
+          movies: updateMovies,
+          watchList: data.watchListIds
+        })
+      })
   }
 
   render() {
