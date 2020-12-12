@@ -1,0 +1,67 @@
+.nav-bar {
+  font-family: "Space Grotesk", sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: rgba(215, 215, 215, 0.2);
+  padding: 0 2em;
+}
+
+.nav-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5%;
+  width: 100%;
+  border-style: solid #fdfffc;
+  border-width: 1px;
+}
+
+.nav-bottom {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.filter-inputs {
+  background-color: none;
+  color: whitesmoke;
+}
+
+.logo {
+  margin: 0.75em;
+  transition: transform 0.3s, cursor 0.3s;
+  &:hover {
+    transform: scale(1.15);
+    cursor: pointer;
+  }
+}
+
+@mixin button-styling {
+  background: none;
+  border-color: #fdfffc;
+  border-style: solid;
+  color: #fdfffc;
+}
+
+@mixin input-styling {
+  background: none;
+  border-bottom-style: solid #fdfffc;
+  color: #fdfffc;
+}
+
+.search-button {
+  @include button-styling;
+}
+
+.sort-button {
+  @include button-styling;
+}
+
+.search-input {
+  @include input-styling;
+  &::placeholder {
+    color: rgba(216, 216, 216, 0.75);
+  }
+}
