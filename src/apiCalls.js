@@ -45,5 +45,9 @@ export const apiCalls = {
 
   addToWatchList: (id) => {
     return updateData("https://rancid-tomatillos-server-tl.herokuapp.com/watch-list", 'POST', id)
+  },
+
+  removeFromWatchList: (id) => {
+    return updateData("https://rancid-tomatillos-server-tl.herokuapp.com/watch-list", 'DELETE', id)
   }
 }
