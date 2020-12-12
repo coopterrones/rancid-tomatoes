@@ -65,6 +65,11 @@ class App extends Component {
     this.updateWatchStatus(id);
   }
 
+  removeFromWatchList = (id) => {
+    apiCalls.removeFromWatchList(id);
+    this.updateWatchStatus(id);
+  }
+
   updateWatchStatus = (id) => {
     const movies = [...this.state.movies]
     const updateMovies = movies.map(movie => {
@@ -99,6 +104,7 @@ class App extends Component {
             <Movies
               movies={displayMovies}
               addToWatchList={this.addToWatchList}
+              removeFromWatchList={this.removeFromWatchList}
             />
           } />
 

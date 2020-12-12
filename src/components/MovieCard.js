@@ -2,10 +2,21 @@ import React from 'react';
 import '../styles/MovieCard.scss';
 import ratingStar from '../assets/rating-star.svg';
 import plus from '../assets/plus-symbol.svg';
+import minus from '../assets/minus-symbol.svg';
 import { Link } from 'react-router-dom';
 
 const MovieCard = (props) => {
-  const { id, title, avgRating, releaseDate, posterImg, addToWatchList } = props;
+  const {
+    id,
+    title,
+    avgRating,
+    releaseDate,
+    posterImg,
+    onWatchList,
+    addToWatchList,
+    removeFromWatchList
+  } = props;
+
   return (
     <section data-testid={`movie-card-${id}`} id={id} className='movie-card'>
       <Link to={`/movie/${id}`}>
@@ -14,8 +25,11 @@ const MovieCard = (props) => {
         </section>
       </Link>
       <section className='movie-info-container'>
-        <img className='add-to-watch-list' src={plus} alt='add-to-watch-list-icon' onClick={() => addToWatchList(id)} />
-        <h3 className='movie-card-title'>{title}</h3>
+        <h3 className='movie-card-title'>
+          <img className='add-to-watch-list' src={plus} alt='add-to-watch-list-icon' onClick={() => addToWatchList(id)} style={onWatchList ? { display: "none" } : { display: "inline-block" }} />
+          <img className='add-to-watch-list' src={minus} alt='remove-from-watch-list-icon' onClick={() => removeFromWatchList(id)} style={onWatchList ? { display: "inline-block" } : { display: "none" }} />
+          {title}
+        </h3>
         <section className='average-rating-container'>
           <img className='rating-star-movie-card' src={ratingStar} alt='rating-star-icon' />
           <p className='average-rating-text'>{avgRating}</p>
