@@ -19,7 +19,9 @@ const getWatchList = (path, action, id) => {
     body: JSON.stringify({ id: id })
   })
     .then(response => {
-      if (!response.ok) {
+      if (response.ok) {
+        return response;
+      } else {
         throw new Error('Sorry we are having difficulty loading this page, please try again later!')
       }
     })
