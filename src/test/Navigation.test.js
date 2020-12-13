@@ -104,6 +104,22 @@ describe('Navigation component', () => {
       expect(searchInput).toHaveValue('');
     })
 
+    it('should call getSortedMovies with correct movie', () => {
+      const mockSortMovies = jest.fn()
+      render(<Navigation
+        movies={_movies}
+        getSortedMovies={mockSortMovies}
+      />, { wrapper: MemoryRouter }
+      )
+
+      const submitBtn = screen.getByText('search')
+      const searchInput = screen.getByPlaceholderText('MOVIE NAME');
+      userEvent.type(searchInput, "Elle's Money Plane");
+      userEvent.click(submitBtn);
+
+      expect(mockSortMovies).toHaveBeenCalledWith([_movies[1]]);
+    })
+
   })
 
 })
