@@ -26,8 +26,8 @@ const MovieCard = (props) => {
       </Link>
       <section className='movie-info-container'>
         <h3 className='movie-card-title'>
-          <img className='add-to-watch-list' src={plus} alt='add-to-watch-list-icon' onClick={() => addToWatchList(id)} style={onWatchList ? { display: "none" } : { display: "inline-block" }} />
-          <img className='add-to-watch-list' src={minus} alt='remove-from-watch-list-icon' onClick={() => removeFromWatchList(id)} style={onWatchList ? { display: "inline-block" } : { display: "none" }} />
+          <img className='watch-list-icon' src={plus} alt='add-to-watch-list-icon' onClick={() => addToWatchList(id)} style={onWatchList ? { display: "none" } : { display: "inline-block" }} />
+          <img className='watch-list-icon' src={minus} alt='remove-from-watch-list-icon' onClick={() => removeFromWatchList(id)} style={onWatchList ? { display: "inline-block" } : { display: "none" }} />
           {title}
         </h3>
         <section className='average-rating-container'>
