@@ -41,7 +41,18 @@ describe('Navigation component', () => {
       expect(unsortBtn).toBeInTheDocument();
     })
 
-  
+    it('should call getSortedMovies and pass correct data', () => {
+      const mockSortMovies = jest.fn()
+      render(<Navigation
+        movies={_movies}
+        getSortedMovies={mockSortMovies}
+      />, { wrapper: MemoryRouter }
+      )
+      const sortBtn = screen.getAllByRole('button')[1];
+      userEvent.click(sortBtn);
+
+      expect(mockSortMovies).toBeCalledWith(_movies);
+    })
   })
 
 })
