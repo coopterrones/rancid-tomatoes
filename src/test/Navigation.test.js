@@ -71,6 +71,20 @@ describe('Navigation component', () => {
       expect(searchInput).toHaveValue('mulan');
     })
 
+    it('should change input value to lowercase', () => {
+      render(<Navigation
+        movies={_movies}
+        getSortedMovies={jest.fn()}
+      />, { wrapper: MemoryRouter }
+      )
+
+      const searchInput = screen.getByPlaceholderText('MOVIE NAME');
+
+      userEvent.type(searchInput, 'Rapanzel');
+
+      expect(searchInput).toHaveValue('rapanzel');
+    })
+
   })
 
 
