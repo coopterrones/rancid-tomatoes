@@ -55,4 +55,24 @@ describe('Navigation component', () => {
     })
   })
 
+  describe('HandleOnChange method', () => {
+
+    it('should change input value once inputing', () => {
+      render(<Navigation
+        movies={_movies}
+        getSortedMovies={jest.fn()}
+      />, { wrapper: MemoryRouter }
+      )
+
+      const searchInput = screen.getByPlaceholderText('MOVIE NAME');
+
+      userEvent.type(searchInput, 'mulan');
+
+      expect(searchInput).toHaveValue('mulan');
+    })
+
+  })
+
+
+
 })
