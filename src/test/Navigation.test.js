@@ -27,6 +27,21 @@ describe('Navigation component', () => {
       expect(sortBtn).toBeInTheDocument();
     })
 
+    it('should change sort button name once clicked', () => {
+      render(<Navigation
+        movies={_movies}
+        getSortedMovies={jest.fn()}
+      />, { wrapper: MemoryRouter }
+      )
+
+      const sortBtn = screen.getAllByRole('button')[1];
+      userEvent.click(sortBtn);
+
+      const unsortBtn = screen.getByText('All Movies');
+      expect(unsortBtn).toBeInTheDocument();
+    })
+
+  
   })
 
 })
