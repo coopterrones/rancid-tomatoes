@@ -8,7 +8,6 @@ const Movies = ({ movies, addToWatchList, removeFromWatchList }) => {
     const formattedDate = date.toDateString().split(' ');
     return (
       <MovieCard
-        movie={movie}
         id={movie.id}
         title={movie.title}
         avgRating={movie.average_rating.toFixed(1)}
