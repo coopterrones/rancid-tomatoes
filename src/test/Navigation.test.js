@@ -87,6 +87,23 @@ describe('Navigation component', () => {
 
   })
 
+  describe('HandleSubmit method', () => {
 
+    it('should clear input filed after submitting', () => {
+      render(<Navigation
+        movies={_movies}
+        getSortedMovies={jest.fn()}
+      />, { wrapper: MemoryRouter }
+      )
+
+      const submitBtn = screen.getByText('search')
+      const searchInput = screen.getByPlaceholderText('MOVIE NAME');
+      userEvent.type(searchInput, "Elle's Money Plane");
+      userEvent.click(submitBtn);
+
+      expect(searchInput).toHaveValue('');
+    })
+
+  })
 
 })
