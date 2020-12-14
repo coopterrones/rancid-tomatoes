@@ -1,11 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router-dom';
+import { Router, MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import Navigation from '../components/Navigation';
 import { _movies } from './mockData/moviesMockData';
 import { _movie } from './mockData/chosenMovieMockData';
+import { createMemoryHistory } from 'history';
+import WatchList from '../components/WatchList';
 
 describe('Navigation component', () => {
 
@@ -135,6 +137,17 @@ describe('Navigation component', () => {
 
       expect(mockSortMovies).toHaveBeenCalledWith(_movies);
     })
-  })
 
+    describe('watch list route' , () => {
+      it('should render the watch list on click', () => {
+        const history = createMemoryHistory();
+        render(<Router history={history}><Navigation/></Router>)
+
+        const watchListButton = screen.getByText('Watch List');
+        userEvent.click(watchListButton);
+
+        expect(history.location.pathname).toBe('/watch-list');
+      })
+    })
+  })
 })

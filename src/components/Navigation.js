@@ -62,7 +62,7 @@ class Navigation extends Component {
         </section>
         <section className="nav-bottom">
           <button className='sort-button' onClick={this.handleClick}>{this.state.sorted ? "All Movies" : "Recent Releases"}</button>
-          <Link to='/watchList'>
+          <Link to='/watch-list'>
             <button className='watch-list-button'>Watch List</button>
           </Link>
         </section>

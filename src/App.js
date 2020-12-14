@@ -128,7 +128,7 @@ class App extends Component {
           } />
 
         <Route path='/movie/:id' component={ChosenMovie} />
-        <Route path='/watchList'
+        <Route path='/watch-list'
           render={() => 
           <WatchList
             watchListMovies={this.getWatchList}
