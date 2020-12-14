@@ -64,12 +64,18 @@ class App extends Component {
 
   addToWatchList = (id) => {
     apiCalls.addToWatchList(id)
-    .then(() => this.updateWatchStatus(id));
+    .then(() => this.updateWatchStatus(id))
+    .catch(err => this.setState({
+      error: err.message
+    }))
   }
 
   removeFromWatchList = (id) => {
     apiCalls.removeFromWatchList(id)
-    .then(() => this.updateWatchStatus(id));
+    .then(() => this.updateWatchStatus(id))
+    .catch(err => this.setState({
+      error: err.message
+    }))
   }
 
   updateWatchStatus = (id) => {
