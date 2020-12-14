@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import rancidTomato from '../assets/rancidTomatillo.png';
+import { Link } from 'react-router-dom';
+import rancidTomato from '../assets/rancid-tomatillos.png';
 import '../styles/Navigation.scss';
 
 class Navigation extends Component {
@@ -47,11 +48,11 @@ class Navigation extends Component {
   }
 
   render() {
-    const { getSortedMovies } = this.props;
+    const { getSortedMovies, displayWatchList } = this.props;
     return (
       <nav className='nav-bar'>
         <section className="nav-top">
-          <img className='logo' src={rancidTomato} alt='logo' height='35px' width='35px' onClick={() => getSortedMovies([])} />
+          <img className='logo' src={rancidTomato} alt='logo' height='75px' width='225px' onClick={() => getSortedMovies([])} />
           <form onSubmit={this.handleSubmit} className='filter-inputs'>
             <label>
               <input className="search-input" placeholder="MOVIE NAME" name="search" value={this.state.search} onChange={this.handleOnChange} />
@@ -61,6 +62,9 @@ class Navigation extends Component {
         </section>
         <section className="nav-bottom">
           <button className='sort-button' onClick={this.handleClick}>{this.state.sorted ? "All Movies" : "Recent Releases"}</button>
+          <Link to='/watchList'>
+            <button className='watch-list-button'>Watch List</button>
+          </Link>
         </section>
       </nav>
 

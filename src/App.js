@@ -7,6 +7,7 @@ import { Route } from 'react-router-dom';
 import Loading from './components/Loading';
 import Navigation from './components/Navigation';
 import Error from './components/Error';
+import WatchList from './components/WatchList';
 
 class App extends Component {
   constructor() {
@@ -62,13 +63,13 @@ class App extends Component {
   }
 
   addToWatchList = (id) => {
-    apiCalls.addToWatchList(id);
-    this.updateWatchStatus(id);
+    apiCalls.addToWatchList(id)
+    .then(() => this.updateWatchStatus(id));
   }
 
   removeFromWatchList = (id) => {
-    apiCalls.removeFromWatchList(id);
-    this.updateWatchStatus(id);
+    apiCalls.removeFromWatchList(id)
+    .then(() => this.updateWatchStatus(id));
   }
 
   updateWatchStatus = (id) => {
@@ -89,8 +90,21 @@ class App extends Component {
       })
   }
 
+  getWatchList = () => {
+    const { movies, watchList } = this.state;
+    const watchListMovies = watchList.reduce((moviesOnList, watchListId) => {
+      movies.forEach(movie => {
+        if (movie.id === watchListId) {
+          moviesOnList.push(movie);
+        }
+      }) 
+      return moviesOnList;
+    }, [])
+    return watchListMovies;
+  }
+
   render() {
-    const { movies, queries, error, loaded } = this.state;
+    const { movies, queries, watchList, error, loaded } = this.state;
     const displayMovies = queries.length ? queries : movies;
     return (
       <main className='App'>
@@ -114,6 +128,15 @@ class App extends Component {
           } />
 
         <Route path='/movie/:id' component={ChosenMovie} />
+        <Route path='/watchList'
+          render={() => 
+          <WatchList
+            watchListMovies={this.getWatchList}
+            addToWatchList={this.addToWatchList}
+            removeFromWatchList={this.removeFromWatchList}
+          />
+          }
+        />
       </main>
     )
   }
