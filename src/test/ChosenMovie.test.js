@@ -1,3 +1,4 @@
+import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ChosenMovie from '../components/ChosenMovie';
@@ -5,14 +6,12 @@ import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { _movieId, _movie, _video} from '../test/mockData/chosenMovieMockData';
 import { apiCalls } from '../apiCalls';
-jest.mock('../apiCalls')
+jest.mock('../apiCalls');
 
 describe('ChosenMovie Component', () => {
   beforeEach(() => {
     apiCalls.selectMovie.mockResolvedValueOnce(_movie);
     apiCalls.selectVideo.mockResolvedValueOnce(_video);
-
-    // render(<ChosenMovie match={_movieId}/>, {wrapper: MemoryRouter})
   })
 
   it('should display loading', () => {
@@ -43,15 +42,15 @@ describe('ChosenMovie Component', () => {
     render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
 
     const title = await waitFor(() => screen.getByText('Mulan'));
-    const releaseDate= await waitFor(() => screen.getByText('Release Date: 2020-09-04'));
-    const returnBtn = await waitFor(() => screen.getByRole('img'));
+    const releaseDate = await waitFor(() => screen.getByText('Sep 03, 2020'));
+    const returnBtn = await waitFor(() => screen.getAllByRole('img')[0]);
     const overView = await waitFor(() => screen.getByTestId('overview'));
     const genre = await waitFor(() => screen.getByTestId('genre'));
-    const budget = await waitFor(() => screen.getByText('Budget: $200000000'));
-    const revenue = await waitFor(() => screen.getByText('Revenue: $57000000'));
-    const runTime = await waitFor(() => screen.getByText('Runtime: 115'));
+    const budget = await waitFor(() => screen.getByText('Budget: $200M'));
+    const revenue = await waitFor(() => screen.getByText('Revenue: $57M'));
+    const runTime = await waitFor(() => screen.getByText('115min.'));
     const tagline = await waitFor(() => screen.getByText('Tagline: this is a tagline'));
-    const rating = await waitFor(() => screen.getByText('Rating: 4.9'));
+    const rating = await waitFor(() => screen.getByText('4.9'));
 
     expect(title).toBeInTheDocument();
     expect(releaseDate).toBeInTheDocument();

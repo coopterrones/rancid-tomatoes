@@ -1,6 +1,6 @@
 const getData = (path) => {
   return fetch(path)
-    .then(response => {
+    .then (response => {
       if (response.ok) {
         return response.json()
       } else {
@@ -18,7 +18,7 @@ const updateData = (path, action, id) => {
     },
     body: JSON.stringify({ id: id })
   })
-    .then(response => {
+    .then (response => {
       if (response.ok) {
         return response;
       } else {

@@ -5,7 +5,6 @@ import ratingStar from '../assets/rating-star.svg';
 import runtimeReel from '../assets/runtime-reel.svg';
 import { apiCalls } from '../apiCalls';
 import { Link } from 'react-router-dom';
-import { Spring } from 'react-spring/renderprops'
 import Loading from './Loading';
 
 class ChosenMovie extends Component {
@@ -56,36 +55,28 @@ class ChosenMovie extends Component {
       const releaseDate = this.formatDate(movie.release_date);
       return (
         <section className='chosen-movie' data-testid='chosen-movie'>
-        <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
-          <section className="movie-info">
-            <Link to='/'>
-              <img data-testid='return-btn' className="back-button-icon" src={backButton} alt='back-button-icon'/>
-            </Link>
-            <h3>{movie.title}</h3>
-          <section className='numeric-info'>
-            <p className='rating-text'><img className='rating-star' src={ratingStar} alt='rating-star-icon'/> {movie.average_rating.toFixed(1)}</p>
-            <p className='runtime-text'><img className='runtime-reel' src={runtimeReel} alt='runtime-reel-icon'/>{movie.runtime}min.</p>
-            <p className='release-date-text-chosen'>{releaseDate[1]} {releaseDate[2]}, {releaseDate[3]}</p>
-          </section>
-          <p className='overview-text' data-testid='overview'>Overview: {movie.overview}</p>
-          <section className='genre' data-testid='genre'>{genres}</section>
-          <section className='monetary-info'>
-            <p className='budget-text'>Budget: ${this.formatMonetaryInfo(movie.budget)}M</p>
-            <p className='revenue-text'>Revenue: ${this.formatMonetaryInfo(movie.revenue)}M</p>
-          </section>
-          <p>Tagline: {movie.tagline}</p>
-          </section>
-          <Spring
-            config={{mass:2, tension: 6.5, friction: 0, clamp: true}}
-            from={{opactiy: 0, marginTop: -250}}
-            to={{opactiy: 1, marginTop: 0}}
-          >
-            { props => (  
-              <section className="video-frame" style={ props }>
-                <iframe className="video-container"src={`https://youtube.com/embed/${video.key}`} alt='trailer-iframe-video-player' title='trailer-video-player' height="400" width="700"></iframe>                
+          <section className='backdrop-img'style={{ backgroundImage: `linear-gradient(to right, black, 55%, transparent), url(${movie.backdrop_path})`}}>
+            <section className="movie-info">
+              <Link to='/'>
+                <img data-testid='return-btn' className="back-button-icon" src={backButton} alt='back-button-icon'/>
+              </Link>
+              <h3>{movie.title}</h3>
+              <section className='numeric-info'>
+                <p className='rating-text'><img className='rating-star' src={ratingStar} alt='rating-star-icon'/> {movie.average_rating.toFixed(1)}</p>
+                <p className='runtime-text'><img className='runtime-reel' src={runtimeReel} alt='runtime-reel-icon'/>{movie.runtime}min.</p>
+                <p className='release-date-text-chosen'>{releaseDate[1]} {releaseDate[2]}, {releaseDate[3]}</p>
               </section>
-            )} 
-          </Spring>
+              <p className='overview-text' data-testid='overview'>Overview: {movie.overview}</p>
+              <section className='genre' data-testid='genre'>{genres}</section>
+              <section className='monetary-info'>
+                <p className='budget-text'>Budget: ${this.formatMonetaryInfo(movie.budget)}M</p>
+                <p className='revenue-text'>Revenue: ${this.formatMonetaryInfo(movie.revenue)}M</p>
+              </section>
+              <p>Tagline: {movie.tagline}</p>
+            </section>
+            <section className="video-frame">
+              <iframe className="video-container"src={`https://youtube.com/embed/${video.key}`} alt='trailer-iframe-video-player' title='trailer-video-player' height="400" width="700"></iframe>                
+            </section>
           </section>
         </section>
       )

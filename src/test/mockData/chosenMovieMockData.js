@@ -1,6 +1,6 @@
 export const _movieId = {
   params:{
-    id: 694919,
+    id: 337401,
   }
 }
 
