@@ -104,7 +104,7 @@ class App extends Component {
   }
 
   render() {
-    const { movies, queries, watchList, error, loaded } = this.state;
+    const { movies, queries, error, loaded } = this.state;
     const displayMovies = queries.length ? queries : movies;
     return (
       <main className='App'>

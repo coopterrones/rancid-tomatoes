@@ -33,7 +33,7 @@ const WatchList = ({watchListMovies, addToWatchList, removeFromWatchList}) => {
     return (
     <section className='watch-list-empty'>
       <Link to='/'>
-              <img data-testid='return-btn' className="back-button-icon" src={backButton} alt='back-button-icon'/>
+        <img data-testid='return-btn' className="back-button-icon" src={backButton} alt='back-button-icon'/>
       </Link>
       <p className='watch-list-empty-prompt'>No movies in your watch list. Please add to list!</p>
     </section>

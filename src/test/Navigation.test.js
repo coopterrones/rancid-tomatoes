@@ -7,7 +7,6 @@ import Navigation from '../components/Navigation';
 import { _movies } from './mockData/moviesMockData';
 import { _movie } from './mockData/chosenMovieMockData';
 import { createMemoryHistory } from 'history';
-import WatchList from '../components/WatchList';
 
 describe('Navigation component', () => {
 
