@@ -1,0 +1,22 @@
+.watch-list-movies-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.watch-list-empty,
+.watch-list-movies-container {
+  padding-top: 2.5%;
+  padding-left: 2.5%;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: row;
+}
+
+.watch-list-empty-prompt {
+  padding-left: 1%;
+}

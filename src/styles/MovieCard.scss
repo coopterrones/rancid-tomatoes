@@ -9,8 +9,12 @@
   color: #ffffff;
   background-color: #1f1f1f;
   text-decoration: none;
+}
+
+.movie-img-container {
+  transition: cursor 0.3s;
   &:hover {
-    cursor: pointer;
+  cursor: pointer;
   }
 }
 
@@ -30,12 +34,20 @@
   }
 }
 
-.rating-star-movie-card {
+.rating-star-movie-card,
+.watch-list-icon {
   padding-top: 0.2em;
   height: 1.25em;
   width: 1.25em;
   filter: invert(91%) sepia(22%) saturate(6764%) hue-rotate(5deg)
     brightness(101%) contrast(104%);
+  transition: cursor 0.3s;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.watch-list-icon {
+  margin: -6.75% 0.1em;
 }
 
 .average-rating-container {

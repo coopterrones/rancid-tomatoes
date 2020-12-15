@@ -1,8 +1,8 @@
 import React from 'react';
 import MovieCard from './MovieCard';
-import '../styles/Movie.scss';
+import '../styles/Movies.scss';
 
-const Movies = ({movies}) => {
+const Movies = ({ movies, addToWatchList, removeFromWatchList }) => {
   const movieCards = movies.map((movie) => {
     const date = new Date(movie.release_date);
     const formattedDate = date.toDateString().split(' ');
@@ -13,7 +13,10 @@ const Movies = ({movies}) => {
         avgRating={movie.average_rating.toFixed(1)}
         releaseDate={formattedDate}
         posterImg={movie.poster_path}
+        onWatchList={movie.onWatchList}
         key={movie.id}
+        addToWatchList={addToWatchList}
+        removeFromWatchList={removeFromWatchList}
       />
     )
   })

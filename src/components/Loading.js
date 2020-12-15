@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Spring } from "react-spring/renderprops";
 
 class Loading extends Component {
   static style = ({ props }) => ({
@@ -21,14 +20,9 @@ class Loading extends Component {
 
   render() {
     return (
-      <Spring
-        reset
-        from={{ opacity: 1, diameter: 0 }}
-        to={{ opacity: 0, diameter: 100 }}
-        onRest={this.handleRest}
-      >
-        {props => <div style={Loading.style({ props })} />}
-      </Spring>
+      <div>
+        Loading...
+      </div>
     );
   }
 }
