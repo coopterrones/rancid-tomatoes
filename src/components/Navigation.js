@@ -40,9 +40,10 @@ class Navigation extends Component {
         <section className="nav-top">
           <img className='logo' src={rancidTomato} alt='logo' height='75px' width='225px' onClick={() => getSearchedMovies([])} />
           <form onSubmit={this.handleSubmit} className='filter-inputs'>
-            <label>
-              <input className="search-input" placeholder="MOVIE NAME" name="search" value={this.state.search} onChange={this.handleOnChange} />
-            </label>
+            <div className="search-input-wrap">
+              <input className="search-input" id="search" placeholder="MOVIE NAME" name="search" value={this.state.search} onChange={this.handleOnChange} />
+              <label htmlFor='search'></label>
+            </div>
             <input className="search-button" type="submit" value='search' />
           </form>
         </section>

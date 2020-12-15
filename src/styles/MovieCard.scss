@@ -1,3 +1,5 @@
+@import "variables";
+
 .movie-card {
   display: flex;
   flex-direction: column;
@@ -6,15 +8,15 @@
   height: 35vh;
   width: 15vw;
   margin: 7vh 5vw;
-  color: #ffffff;
-  background-color: #1f1f1f;
+  color: $White;
+  background-color: $dark-grey;
   text-decoration: none;
 }
 
 .movie-img-container {
   transition: cursor 0.3s;
   &:hover {
-  cursor: pointer;
+    cursor: pointer;
   }
 }
 
@@ -64,5 +66,33 @@
   transition: transform 0.3s;
   &:hover {
     transform: scale(1.25);
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Space Grotesk", sans-serif;
+    height: 35vh;
+    width: 25vw;
+    margin: 5vh 0 45vh;
+    color: $White;
+    background-color: $dark-grey;
+    text-decoration: none;
+  }
+
+  .poster-img {
+    max-width: 75vw;
+    max-height: 50vh;
+  }
+
+  .movie-info-container {
+    width: 75vw;
+  }
+
+  .watch-list-icon {
+    margin: -2.75% 0.1em;
   }
 }
