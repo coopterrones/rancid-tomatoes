@@ -13,15 +13,12 @@ describe('Navigation component', () => {
   describe('HandleClick method', () => {
 
     it('should render correctly', () => {
-      render(<Navigation
-        movies={_movies}
-        getStoredMovies={jest.fn()}
-      />, { wrapper: MemoryRouter }
+      render(<Navigation />, { wrapper: MemoryRouter }
       )
 
       const searchInput = screen.getByPlaceholderText('MOVIE NAME');
       const submitBtn = screen.getByText('search')
-      const sortBtn = screen.getByText('Recent Releases')
+      const sortBtn = screen.getByText('Newest - Oldest')
 
       expect(searchInput).toBeInTheDocument();
       expect(submitBtn).toBeInTheDocument();
@@ -30,29 +27,31 @@ describe('Navigation component', () => {
 
     it('should change sort button name once clicked', () => {
       render(<Navigation
-        movies={_movies}
-        getSortedMovies={jest.fn()}
+        sortMovies={jest.fn()}
+        sortStatus={'false'}
       />, { wrapper: MemoryRouter }
       )
 
       const sortBtn = screen.getAllByRole('button')[1];
       userEvent.click(sortBtn);
 
-      const unsortBtn = screen.getByText('All Movies');
+      const unsortBtn = screen.getByText('Oldest - Newest');
       expect(unsortBtn).toBeInTheDocument();
     })
 
-    it('should call getSortedMovies and pass correct data', () => {
+    it('should call getSearchedMovies', () => {
       const mockSortMovies = jest.fn()
       render(<Navigation
         movies={_movies}
-        getSortedMovies={mockSortMovies}
+        getSearchedMovies={jest.mock()}
+        sortMovies={mockSortMovies}
+        sortStatus={'false'}
       />, { wrapper: MemoryRouter }
       )
       const sortBtn = screen.getAllByRole('button')[1];
       userEvent.click(sortBtn);
 
-      expect(mockSortMovies).toBeCalledWith(_movies);
+      expect(mockSortMovies).toBeCalled();
     })
   })
 
@@ -61,12 +60,11 @@ describe('Navigation component', () => {
     it('should change input value once inputing', () => {
       render(<Navigation
         movies={_movies}
-        getSortedMovies={jest.fn()}
+        getSearchedMovies={jest.fn()}
       />, { wrapper: MemoryRouter }
       )
 
       const searchInput = screen.getByPlaceholderText('MOVIE NAME');
-
       userEvent.type(searchInput, 'mulan');
 
       expect(searchInput).toHaveValue('mulan');
@@ -75,7 +73,7 @@ describe('Navigation component', () => {
     it('should change input value to lowercase', () => {
       render(<Navigation
         movies={_movies}
-        getSortedMovies={jest.fn()}
+        getSearchedMovies={jest.fn()}
       />, { wrapper: MemoryRouter }
       )
 
@@ -93,7 +91,7 @@ describe('Navigation component', () => {
     it('should clear input filed after submitting', () => {
       render(<Navigation
         movies={_movies}
-        getSortedMovies={jest.fn()}
+        getSearchedMovies={jest.fn()}
       />, { wrapper: MemoryRouter }
       )
 
@@ -105,11 +103,11 @@ describe('Navigation component', () => {
       expect(searchInput).toHaveValue('');
     })
 
-    it('should call getSortedMovies with correct movie', () => {
+    it('should call getSearchedMovies with correct movie', () => {
       const mockSortMovies = jest.fn()
       render(<Navigation
         movies={_movies}
-        getSortedMovies={mockSortMovies}
+        getSearchedMovies={mockSortMovies}
       />, { wrapper: MemoryRouter }
       )
 
@@ -121,11 +119,11 @@ describe('Navigation component', () => {
       expect(mockSortMovies).toHaveBeenCalledWith([_movies[1]]);
     })
 
-    it('should call getSortedMovies with correct movies', () => {
+    it('should call getSearchedMovies with correct movies', () => {
       const mockSortMovies = jest.fn()
       render(<Navigation
         movies={_movies}
-        getSortedMovies={mockSortMovies}
+        getSearchedMovies={mockSortMovies}
       />, { wrapper: MemoryRouter }
       )
 
@@ -137,10 +135,10 @@ describe('Navigation component', () => {
       expect(mockSortMovies).toHaveBeenCalledWith(_movies);
     })
 
-    describe('watch list route' , () => {
+    describe('watch list route', () => {
       it('should render the watch list on click', () => {
         const history = createMemoryHistory();
-        render(<Router history={history}><Navigation/></Router>)
+        render(<Router history={history}><Navigation /></Router>)
 
         const watchListButton = screen.getByText('Watch List');
         userEvent.click(watchListButton);
@@ -149,4 +147,5 @@ describe('Navigation component', () => {
       })
     })
   })
+
 })
