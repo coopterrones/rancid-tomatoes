@@ -16,6 +16,7 @@ class App extends Component {
       movies: [],
       queries: [],
       watchList: [],
+      sorted: false,
       error: '',
       loaded: false
     }
@@ -56,26 +57,48 @@ class App extends Component {
       }))
   }
 
-  getSortedMovies = (sortedMovies) => {
+  sortMovies = () => {
+    let moviesList = this.state.queries.length ? [...this.state.queries] : [...this.state.movies];
+    if (this.state.sorted) {
+      moviesList.sort((a, b) => {
+        return new Date(a.release_date) - new Date(b.release_date)
+      })
+    } else {
+      moviesList.sort((b, a) => {
+        return new Date(a.release_date) - new Date(b.release_date)
+      })
+    }
+    if (this.state.queries.length) {
+      this.setState((prevState) => {
+        return { queries: moviesList, sorted: !prevState.sorted }
+      })
+    } else {
+      this.setState((prevState) => {
+        return { movies: moviesList, sorted: !prevState.sorted }
+      })
+    }
+  }
+
+  getSearchedMovies = (queriedMovies) => {
     this.setState({
-      queries: sortedMovies
+      queries: queriedMovies
     })
   }
 
   addToWatchList = (id) => {
     apiCalls.addToWatchList(id)
-    .then(() => this.updateWatchStatus(id))
-    .catch(err => this.setState({
-      error: err.message
-    }))
+      .then(() => this.updateWatchStatus(id))
+      .catch(err => this.setState({
+        error: err.message
+      }))
   }
 
   removeFromWatchList = (id) => {
     apiCalls.removeFromWatchList(id)
-    .then(() => this.updateWatchStatus(id))
-    .catch(err => this.setState({
-      error: err.message
-    }))
+      .then(() => this.updateWatchStatus(id))
+      .catch(err => this.setState({
+        error: err.message
+      }))
   }
 
   updateWatchStatus = (id) => {
@@ -103,24 +126,27 @@ class App extends Component {
         if (movie.id === watchListId) {
           moviesOnList.push(movie);
         }
-      }) 
+      })
       return moviesOnList;
     }, [])
     return watchListMovies;
   }
 
   render() {
-    const { movies, queries, error, loaded } = this.state;
+    const { movies, queries, sorted, error, loaded } = this.state;
     const displayMovies = queries.length ? queries : movies;
     return (
       <main className='App'>
         {error && <Error />}
         {!loaded && <Loading />}
+
         <Route path='/' exact
           render={() =>
             <Navigation
               movies={displayMovies}
-              getSortedMovies={this.getSortedMovies}
+              getSearchedMovies={this.getSearchedMovies}
+              sortMovies={this.sortMovies}
+              sortStatus={sorted}
             />
           } />
 
@@ -135,12 +161,12 @@ class App extends Component {
 
         <Route path='/movie/:id' component={ChosenMovie} />
         <Route path='/watch-list'
-          render={() => 
-          <WatchList
-            watchListMovies={this.getWatchList}
-            addToWatchList={this.addToWatchList}
-            removeFromWatchList={this.removeFromWatchList}
-          />
+          render={() =>
+            <WatchList
+              watchListMovies={this.getWatchList}
+              addToWatchList={this.addToWatchList}
+              removeFromWatchList={this.removeFromWatchList}
+            />
           }
         />
       </main>
