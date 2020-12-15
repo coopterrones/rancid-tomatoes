@@ -1,3 +1,5 @@
+@import "variables";
+
 .nav-bar {
   font-family: "Space Grotesk", sans-serif;
   display: flex;
@@ -13,7 +15,7 @@
   align-items: center;
   height: 5%;
   width: 100%;
-  border-style: solid #fdfffc;
+  border-style: solid $White;
   border-width: 1px;
 }
 
@@ -24,8 +26,16 @@
 }
 
 .filter-inputs {
+  display: flex;
+  flex-direction: row;
   background-color: none;
   color: whitesmoke;
+}
+
+.search-input-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .logo {
@@ -38,15 +48,15 @@
 }
 
 @mixin button-styling {
-  background: #fdfffc;
+  background: $White;
   color: #000000;
   border-radius: 25em;
   padding: 0.75em 3em;
   margin: 0 1em;
   transition: color 1s, cursor 0.3s, background 0.3s;
   &:hover {
-    background: #1f1f1f;
-    color: #fdfffc;
+    background: $dark-grey;
+    color: $White;
     padding: 0.75em 3em;
     cursor: pointer;
   }
@@ -54,8 +64,8 @@
 
 @mixin input-styling {
   background: none;
-  border-bottom-style: solid #fdfffc;
-  color: #fdfffc;
+  border-bottom-style: solid $White;
+  color: $White;
 }
 
 .search-button {
@@ -78,5 +88,79 @@
   @include input-styling;
   &::placeholder {
     color: #fdfffc;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  @mixin button-styling-mobile {
+    background: $White;
+    color: #000000;
+    border-radius: 25em;
+    margin: 0 1em;
+    transition: color 1s, cursor 0.3s, background 0.3s;
+    &:hover {
+      background: $dark-grey;
+      color: $White;
+      cursor: pointer;
+    }
+  }
+
+  .nav-bar {
+    font-family: "Space Grotesk", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1em 0 0.5em;
+  }
+
+  .nav-top {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 5%;
+    width: 100%;
+    border-style: solid $White;
+    border-width: 1px;
+  }
+
+  .search-button {
+    @include button-styling-mobile;
+  }
+
+  .sort-button {
+    @include button-styling-mobile;
+  }
+
+  .watch-list-button {
+    @include button-styling-mobile;
+  }
+
+  .search-input {
+    padding: 0.5em;
+    width: 50vw;
+    margin: 0 2em;
+    color: #fdfffc;
+    @include input-styling;
+    &::placeholder {
+      color: #fdfffc;
+    }
+  }
+
+  .nav-bottom {
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .filter-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
   }
 }

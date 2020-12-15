@@ -1,9 +1,11 @@
+@import "variables";
+
 .watch-list-movies-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background-color: #1f1f1f;
-  color: white;
+  background-color: $dark-grey;
+  color: $White;
 }
 
 .watch-list-empty,
@@ -12,11 +14,34 @@
   padding-left: 2.5%;
   height: 100%;
   width: 100%;
-  color: white;
+  color: $White;
   display: flex;
   flex-direction: row;
 }
 
 .watch-list-empty-prompt {
   padding-left: 1%;
+}
+
+@media only screen and (max-width: 375px) {
+  .watch-list-movies-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: $dark-grey;
+    margin: 0;
+    padding: 2em;
+  }
+
+  .watch-list-empty {
+    width: 85%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-top: 2em;
+  }
 }
