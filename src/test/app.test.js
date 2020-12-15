@@ -61,6 +61,31 @@ describe("App Component", () => {
       expect(title2).not.toBeInTheDocument();
       expect(title3).not.toBeInTheDocument();
     })
+    it('should be able to sort movies by date newest to oldest', async() => {
+      render(<App/>, { wrapper: MemoryRouter });
+      const sortButton = await waitFor(() => screen.getByText('Newest - Oldest'));
+      userEvent.click(sortButton);
+
+      const movieTitles = await waitFor(() => screen.getAllByRole('heading'));
+
+      await waitFor(()=> expect(movieTitles[0]).toHaveTextContent('Money Plane'))
+      await waitFor(() => expect(movieTitles[1]).toHaveTextContent('Mulan'));
+      await waitFor(() => expect(movieTitles[2]).toHaveTextContent('Rogue'));
+    })
+
+    it('should be able to sort movies by date oldest to newest', async() => {
+      render(<App/>, {wrapper: MemoryRouter});
+
+      const sortButton = await waitFor(() => screen.getByText('Newest - Oldest'));
+      userEvent.click(sortButton);
+      userEvent.click(sortButton);
+
+      const movieTitles = await waitFor(() => screen.getAllByRole('heading'));
+
+      await waitFor(()=> expect(movieTitles[0]).toHaveTextContent('Rogue'));
+      await waitFor(() => expect(movieTitles[1]).toHaveTextContent('Mulan'));
+      await waitFor(() => expect(movieTitles[2]).toHaveTextContent('Money Plane'));
+    })
   })
   describe('Watch List', () => {
     it('should render movies on watch list', async() => {

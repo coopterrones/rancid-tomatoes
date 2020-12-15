@@ -1,5 +1,6 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import ChosenMovie from '../components/ChosenMovie';
 import { Router } from 'react-router-dom';
@@ -69,7 +70,7 @@ describe('ChosenMovie Component', () => {
     render(<Router history={history}><ChosenMovie match={_movieId} /></Router>);
 
     const returnBtn = await waitFor(() => screen.getByTestId('return-btn'));
-    fireEvent.click(returnBtn);
+    userEvent.click(returnBtn);
  
     expect(history.location.pathname).toBe('/');
   })
