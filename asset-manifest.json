@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/rancid-tomatoes/static/css/main.0e40465b.chunk.css",
+    "main.js": "/rancid-tomatoes/static/js/main.07e59902.chunk.js",
+    "main.js.map": "/rancid-tomatoes/static/js/main.07e59902.chunk.js.map",
+    "runtime-main.js": "/rancid-tomatoes/static/js/runtime-main.d91d66a2.js",
+    "runtime-main.js.map": "/rancid-tomatoes/static/js/runtime-main.d91d66a2.js.map",
+    "static/js/2.979af1ed.chunk.js": "/rancid-tomatoes/static/js/2.979af1ed.chunk.js",
+    "static/js/2.979af1ed.chunk.js.map": "/rancid-tomatoes/static/js/2.979af1ed.chunk.js.map",
+    "static/js/3.82aa0f93.chunk.js": "/rancid-tomatoes/static/js/3.82aa0f93.chunk.js",
+    "static/js/3.82aa0f93.chunk.js.map": "/rancid-tomatoes/static/js/3.82aa0f93.chunk.js.map",
+    "index.html": "/rancid-tomatoes/index.html",
+    "static/css/main.0e40465b.chunk.css.map": "/rancid-tomatoes/static/css/main.0e40465b.chunk.css.map",
+    "static/js/2.979af1ed.chunk.js.LICENSE.txt": "/rancid-tomatoes/static/js/2.979af1ed.chunk.js.LICENSE.txt",
+    "static/media/back-button.b42bda0d.svg": "/rancid-tomatoes/static/media/back-button.b42bda0d.svg",
+    "static/media/minus-symbol.49ccdae4.svg": "/rancid-tomatoes/static/media/minus-symbol.49ccdae4.svg",
+    "static/media/plus-symbol.db973228.svg": "/rancid-tomatoes/static/media/plus-symbol.db973228.svg",
+    "static/media/rancid-tomatillos.5ac5c3c3.png": "/rancid-tomatoes/static/media/rancid-tomatillos.5ac5c3c3.png",
+    "static/media/rating-star.dbbb2811.svg": "/rancid-tomatoes/static/media/rating-star.dbbb2811.svg",
+    "static/media/runtime-reel.3af85ac9.svg": "/rancid-tomatoes/static/media/runtime-reel.3af85ac9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d91d66a2.js",
+    "static/js/2.979af1ed.chunk.js",
+    "static/css/main.0e40465b.chunk.css",
+    "static/js/main.07e59902.chunk.js"
+  ]
+}
