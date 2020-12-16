@@ -97,4 +97,15 @@ Navigate to the deployed site on Github Pages.
   - Tuple
 
 ## Demos 
+### Movie Library
 ![Movie Library](https://media.giphy.com/media/TYqKgtVbeibTXOgqzN/giphy.gif)
+### View Movie 
+![View Movie](https://media.giphy.com/media/b6sViy0Ux4UMtDyBNR/giphy.gif)
+### Sort Movies 
+![Sort Movies](https://media.giphy.com/media/2kkumQ1OPvTk0MhRrt/giphy.gif)
+### Search 
+![Search Movies](https://media.giphy.com/media/HrhegHvoIxwnEmv7rr/giphy.gif)
+### Watch List 
+![Watch List](https://media.giphy.com/media/HrhegHvoIxwnEmv7rr/giphy.gif)
+### Responsive Design
+![Responsive](https://media.giphy.com/media/vpF1iJtyOUxxPijGMB/giphy.gif)
