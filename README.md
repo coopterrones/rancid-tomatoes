@@ -97,4 +97,4 @@ Navigate to the deployed site on Github Pages.
   - Tuple
 
 ## Demos 
-[[Movie Library](https://media.giphy.com/media/TYqKgtVbeibTXOgqzN/giphy.gif)]
+![Movie Library](https://media.giphy.com/media/TYqKgtVbeibTXOgqzN/giphy.gif)
