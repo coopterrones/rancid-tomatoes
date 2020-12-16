@@ -95,3 +95,6 @@ Navigate to the deployed site on Github Pages.
   - Github Project Boards
   - Zoom
   - Tuple
+
+## Demos 
+[[Movie Library](https://media.giphy.com/media/TYqKgtVbeibTXOgqzN/giphy.gif)]
