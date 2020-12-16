@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# Rancid Tomatoes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Elle Li](https://github.com/Elle624)
 
-## Available Scripts
+[Cooper Terones](https://github.com/coopterrones)
 
-In the project directory, you can run:
+Rancid Tomatillos MVP; Paired Project; Module 3
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The Rancid Tomatoes application allows a user to view a library of movies from an API. Within this library the user is capable of sorting and searching through their library. This application was built using the React Framework with the accompaning JSX syntax and tested with a combination of React-Testing-Library and Jest. Our stretch goal included creating a watch-list where users can add and remove movies. The associated technologies used for the stretch goal included an Express server that was deployed using Heroku. This allowed the users to update their watch list using CRUD methods.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Usage
 
-### `npm test`
+Navigate to the deployed site on Github Pages.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- On load all movies are viewable in a library
 
-### `npm run build`
+- Users can search movies by title
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Users can sort movies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  - Newest - Oldest
+  - Oldest - Newest
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Users can update the watch list using
 
-### `npm run eject`
+  - The + symbol
+  - The - symbol
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Users can view their watch list
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Users can select a movie to view
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Upon selecting a movie to view
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  - The user can view more information about the movie
+  - The user can view a trailer of the movie
 
-## Learn More
+  ## Timeline
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  This project was completed on time within a two-week timeframe.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  ### Week 1
 
-### Code Splitting
+  - MVP goals met
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    - Displaying Library
+    - Displaying Individual Movie
+    - Network Requests & Async JS
+    - Conditional Rendering Used
 
-### Analyzing the Bundle Size
+  - TDD
+  - SASS
+  - UI Improvments
+  - Refactoring
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  ### Week 2
 
-### Making a Progressive Web App
+  - Refactor Using React Router
+  - UI Improvments
+    - React Spring
+    - Icons
+  - Express Server
+    - Created
+    - Deployed
+  - Update Testing
+  - Add Additional Features
+    - Search
+    - Sort
+    - Watch List
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  ## Chalenges and Wins
 
-### Advanced Configuration
+  - **Challenges : **
+  - Test driven development was challenging with learning two new libraries on a new framework. Async testing proved to be a tricky task. Incorporating Jest with React Spring is a continous challenge we are working on.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+  - **Wins :**
+  - For this being our first React project, we made a lot of progress using a new framework and supplemental technologies. We were driven to extend our knowledge by including new tech we were not as comfortable with. In the end, testing was a big win as we pushed through and made sure to test all necessary unit and integration tests.
 
-### Deployment
+  ## Technologies and Resources
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  Technologies Used
 
-### `npm run build` fails to minify
+  - React
+  - React Testing Library
+  - Jest
+  - Express
+  - React Spring
+  - SASS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  Resources
+
+  - Git and Github
+  - Github Project Boards
+  - Zoom
+  - Tuple
