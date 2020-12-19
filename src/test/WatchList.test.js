@@ -10,7 +10,7 @@ describe('Watch list component', () => {
 
   it('should render empty watch list correctly', () => {
     render(
-      <WatchList watchListMovies={() => jest.fn()} />,
+      <WatchList watchListMovies={jest.fn().mockImplementation(() => [])} />,
       { wrapper: MemoryRouter }
     )
 
@@ -25,7 +25,7 @@ describe('Watch list component', () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
-        <WatchList watchListMovies={() => jest.fn()} />
+        <WatchList watchListMovies={jest.fn().mockImplementation(() => [])} />
       </Router>
     )
 
