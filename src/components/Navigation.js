@@ -11,8 +11,7 @@ class Navigation extends Component {
     }
   }
 
-  handleClick = (event) => {
-    event.preventDefault();
+  handleClick = () => {
     this.props.sortMovies();
   }
 
