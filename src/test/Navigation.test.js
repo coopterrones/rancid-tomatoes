@@ -5,7 +5,6 @@ import { Router, MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import Navigation from '../components/Navigation';
 import { _movies } from './mockData/moviesMockData';
-import { _movie } from './mockData/chosenMovieMockData';
 import { createMemoryHistory } from 'history';
 
 describe('Navigation component', () => {
