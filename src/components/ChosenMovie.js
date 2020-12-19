@@ -41,11 +41,7 @@ class ChosenMovie extends Component {
 
   formatMonetaryInfo = (amount) => {
     const formattedAmount = amount / 1000000;
-    if (amount % 1000000) {
-      return formattedAmount.toFixed(2);
-    } else {
-      return formattedAmount;
-    }
+    return amount % 1000000 ? formattedAmount.toFixed(2) : formattedAmount;
   }
 
   render() {
