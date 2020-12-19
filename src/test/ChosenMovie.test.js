@@ -5,11 +5,12 @@ import '@testing-library/jest-dom';
 import ChosenMovie from '../components/ChosenMovie';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
-import { _movieId, _movie, _video} from '../test/mockData/chosenMovieMockData';
+import { _movieId, _movie, _video } from '../test/mockData/chosenMovieMockData';
 import { apiCalls } from '../apiCalls';
 jest.mock('../apiCalls');
 
 describe('ChosenMovie Component', () => {
+
   beforeEach(() => {
     apiCalls.selectMovie.mockResolvedValueOnce(_movie);
     apiCalls.selectVideo.mockResolvedValueOnce(_video);
@@ -38,7 +39,7 @@ describe('ChosenMovie Component', () => {
     expect(apiCalls.selectVideo).toHaveBeenCalledTimes(1);
   })
 
-  it('should render correctly', async() => {
+  it('should render correctly', async () => {
     const history = createMemoryHistory();
     render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
 
@@ -65,13 +66,14 @@ describe('ChosenMovie Component', () => {
     expect(rating).toBeInTheDocument();
   })
 
-  it('should return home page upon clicking back button', async() => {
+  it('should return home page upon clicking back button', async () => {
     const history = createMemoryHistory();
     render(<Router history={history}><ChosenMovie match={_movieId} /></Router>);
 
     const returnBtn = await waitFor(() => screen.getByTestId('return-btn'));
     userEvent.click(returnBtn);
- 
+
     expect(history.location.pathname).toBe('/');
   })
+
 })

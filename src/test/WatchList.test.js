@@ -7,6 +7,7 @@ import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 
 describe('Watch list component', () => {
+
   it('should render empty watch list correctly', () => {
     render(
       <WatchList watchListMovies={() => jest.fn()} />,
@@ -19,6 +20,7 @@ describe('Watch list component', () => {
     expect(backButton).toBeInTheDocument();
     expect(watchListEmptyMessage).toBeInTheDocument();
   })
+
   it('should render a working back button', () => {
     const history = createMemoryHistory();
     render(
@@ -33,4 +35,5 @@ describe('Watch list component', () => {
     expect(history.location.pathname).not.toBe('/watch-list');
     expect(history.location.pathname).toBe('/');
   })
+
 })

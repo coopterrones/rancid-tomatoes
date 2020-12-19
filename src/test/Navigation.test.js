@@ -135,6 +135,7 @@ describe('Navigation component', () => {
     })
 
     describe('watch list route', () => {
+
       it('should render the watch list on click', () => {
         const history = createMemoryHistory();
         render(<Router history={history}><Navigation /></Router>)
@@ -144,7 +145,9 @@ describe('Navigation component', () => {
 
         expect(history.location.pathname).toBe('/watch-list');
       })
+
     })
+
   })
 
 })

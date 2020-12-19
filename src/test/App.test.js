@@ -9,23 +9,28 @@ import { createMemoryHistory } from 'history';
 jest.mock('../apiCalls');
 
 describe("App Component", () => {
+
   beforeEach(() => {
     apiCalls.allMovies.mockResolvedValueOnce(_movies);
     apiCalls.getWatchList.mockResolvedValueOnce({ "watchListIds": [694919, 718444] });
   });
+
   describe('getData', () => {
+
     it('should call allMovies', () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>)
       expect(apiCalls.allMovies).toHaveBeenCalledTimes(1);
     })
+
     it('should render loading', () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>)
       const loadingMessage = screen.getByText('Loading...');
       expect(loadingMessage).toBeInTheDocument();
     })
-    it('should load all movies', async() => {
+
+    it('should load all movies', async () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>)
       const mockTitle1 = await waitFor(() => screen.getByText('Money Plane'));
@@ -37,14 +42,17 @@ describe("App Component", () => {
       expect(mockAvgRating1).toBeInTheDocument();
       expect(mockReleaseDate1).toBeInTheDocument();
     })
+
     it('should load correct url', async () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>);
       expect(history.location.pathname).toBe("/");
     })
+
   })
   describe('Nav section', () => {
-    it('should display correct movie upon searching', async() => {
+
+    it('should display correct movie upon searching', async () => {
       render(<App />, { wrapper: MemoryRouter });
       const searchInput = await waitFor(() => screen.getByPlaceholderText('MOVIE NAME'));
       const submitBtn = await waitFor(() => screen.getAllByRole('button')[0]);
@@ -61,20 +69,21 @@ describe("App Component", () => {
       expect(title2).not.toBeInTheDocument();
       expect(title3).not.toBeInTheDocument();
     })
-    it('should be able to sort movies by date newest to oldest', async() => {
-      render(<App/>, { wrapper: MemoryRouter });
+
+    it('should be able to sort movies by date newest to oldest', async () => {
+      render(<App />, { wrapper: MemoryRouter });
       const sortButton = await waitFor(() => screen.getByText('Newest - Oldest'));
       userEvent.click(sortButton);
 
       const movieTitles = await waitFor(() => screen.getAllByRole('heading'));
 
-      await waitFor(()=> expect(movieTitles[0]).toHaveTextContent('Money Plane'))
+      await waitFor(() => expect(movieTitles[0]).toHaveTextContent('Money Plane'))
       await waitFor(() => expect(movieTitles[1]).toHaveTextContent('Mulan'));
       await waitFor(() => expect(movieTitles[2]).toHaveTextContent('Rogue'));
     })
 
-    it('should be able to sort movies by date oldest to newest', async() => {
-      render(<App/>, {wrapper: MemoryRouter});
+    it('should be able to sort movies by date oldest to newest', async () => {
+      render(<App />, { wrapper: MemoryRouter });
 
       const sortButton = await waitFor(() => screen.getByText('Newest - Oldest'));
       userEvent.click(sortButton);
@@ -82,14 +91,16 @@ describe("App Component", () => {
 
       const movieTitles = await waitFor(() => screen.getAllByRole('heading'));
 
-      await waitFor(()=> expect(movieTitles[0]).toHaveTextContent('Rogue'));
+      await waitFor(() => expect(movieTitles[0]).toHaveTextContent('Rogue'));
       await waitFor(() => expect(movieTitles[1]).toHaveTextContent('Mulan'));
       await waitFor(() => expect(movieTitles[2]).toHaveTextContent('Money Plane'));
     })
   })
+
   describe('Watch List', () => {
-    it('should render movies on watch list', async() => {
-      render( <App/>, {wrapper: MemoryRouter} );
+
+    it('should render movies on watch list', async () => {
+      render(<App />, { wrapper: MemoryRouter });
       const watchListButton = await waitFor(() => screen.getByText('Watch List'))
       userEvent.click(watchListButton);
 
@@ -98,13 +109,13 @@ describe("App Component", () => {
       expect(screen.queryByText('Mulan')).not.toBeInTheDocument();
     })
 
-    it('should be able to add a movie to watch list', async() => {
-      render( <App/>, {wrapper: MemoryRouter} );
+    it('should be able to add a movie to watch list', async () => {
+      render(<App />, { wrapper: MemoryRouter });
       const addButtons = await waitFor(() => screen.getAllByAltText('add-to-watch-list-icon'));
       const watchListButton = await waitFor(() => screen.getByText('Watch List'));
 
-      apiCalls.addToWatchList.mockResolvedValueOnce({"watchListIds": [694919,  718444, 337401] });
-      apiCalls.getWatchList.mockResolvedValueOnce({ "watchListIds": [694919,  718444, 337401] });
+      apiCalls.addToWatchList.mockResolvedValueOnce({ "watchListIds": [694919, 718444, 337401] });
+      apiCalls.getWatchList.mockResolvedValueOnce({ "watchListIds": [694919, 718444, 337401] });
 
       userEvent.click(addButtons[1]);
       userEvent.click(watchListButton);
@@ -113,14 +124,14 @@ describe("App Component", () => {
       await waitFor(() => expect(screen.getByText('Money Plane')).toBeInTheDocument());
       await waitFor(() => expect(screen.getByText('Rogue')).toBeInTheDocument());
     })
-  })
-    it('should be able to remove movies from watch list' , async() => {
-      render( <App/>, {wrapper: MemoryRouter} ); 
+
+    it('should be able to remove movies from watch list', async () => {
+      render(<App />, { wrapper: MemoryRouter });
       const removeButtons = await waitFor(() => screen.getAllByAltText('remove-from-watch-list-icon'))
       const watchListButton = await waitFor(() => screen.getByText('Watch List'))
-      
-      apiCalls.removeFromWatchList.mockResolvedValueOnce({"watchListIds": [718444, 337401]})
-      apiCalls.getWatchList.mockResolvedValueOnce({"watchListIds" : [718444, 337401]})
+
+      apiCalls.removeFromWatchList.mockResolvedValueOnce({ "watchListIds": [718444, 337401] })
+      apiCalls.getWatchList.mockResolvedValueOnce({ "watchListIds": [718444, 337401] })
 
       userEvent.click(removeButtons[0]);
       userEvent.click(watchListButton);
@@ -129,13 +140,18 @@ describe("App Component", () => {
       await waitFor(() => expect(screen.getByText('Mulan')).toBeInTheDocument());
       await waitFor(() => expect(screen.getByText('Rogue')).toBeInTheDocument());
     })
+  })
+
   describe('Chosen movie', () => {
-    it('should redirect upon clicking on movie', async() => {
+
+    it('should redirect upon clicking on movie', async () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>);
       const mockImg = await waitFor(() => screen.getByAltText('Money Plane'));
       userEvent.click(mockImg)
       expect(history.location.pathname).toEqual('/movie/694919');
     })
+
   })
+
 });

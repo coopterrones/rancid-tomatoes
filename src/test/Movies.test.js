@@ -5,6 +5,7 @@ import Movies from '../components/Movies';
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Movies Component', () => {
+
   it('should render correctly', () => {
     render(
       <Movies
