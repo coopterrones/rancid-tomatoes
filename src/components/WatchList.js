@@ -23,7 +23,6 @@ const WatchList = ({ watchListMovies, addToWatchList, removeFromWatchList }) => 
       />
     )
   })
-
   return (
     <section className='watch-list-movies-container'>
       <Link to='/'>
@@ -33,7 +32,6 @@ const WatchList = ({ watchListMovies, addToWatchList, removeFromWatchList }) => 
         watchListMovieCards : <p className='watch-list-empty-prompt'>No movies in your watch list. Please add to list!</p>}
     </section>
   )
-
 }
 
 export default WatchList;
