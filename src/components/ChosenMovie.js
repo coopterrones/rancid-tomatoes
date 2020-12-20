@@ -23,7 +23,7 @@ const ChosenMovie = ({ match }) => {
       })
   }
 
-  useEffect(() => getChosenMovieData());
+  useEffect(() => getChosenMovieData(), []);
 
   const formatDate = (movieReleaseDate) => {
     const date = new Date(movieReleaseDate);
