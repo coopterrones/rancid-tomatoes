@@ -84,8 +84,7 @@ const App = () => {
   }
 
   const updateWatchStatus = (id) => {
-    const allMovies = [...movies]
-    const updateMovies = allMovies.map(movie => {
+    const updateMovies = movies.map(movie => {
       if (movie.id === id) {
         return { ...movie, onWatchList: !movie.onWatchList }
       } else {
