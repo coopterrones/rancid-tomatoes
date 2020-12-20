@@ -7,7 +7,7 @@ import { apiCalls } from '../apiCalls';
 import { Link } from 'react-router-dom';
 import Loading from './Loading';
 
-function ChosenMovie({ match }) {
+const ChosenMovie = ({ match }) => {
   const [movie, setMovie] = useState(null);
   const [video, setVideo] = useState(null);
 
