@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Movies from './components/Movies';
 import ChosenMovie from './components/ChosenMovie';
@@ -9,24 +9,18 @@ import Navigation from './components/Navigation';
 import Error from './components/Error';
 import WatchList from './components/WatchList';
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      movies: [],
-      queries: [],
-      watchList: [],
-      sorted: false,
-      error: '',
-      loaded: false
-    }
-  }
+const App = () => {
+  const [movies, setMovies] = useState([]);
+  const [queries, setqueries] = useState([]);
+  const [watchList, setWatchList] = useState([]);
+  const [error, setError] = useState('');
+  const [sorted, updateSorted] = useState(false);
+  const [loaded, updateloaded] = useState(false);
+  const displayMovies = queries.length ? queries : movies;
 
-  componentDidMount() {
-    this.getData();
-  }
+  useEffect(() => getData(), [])
 
-  getData = () => {
+  const getData = () => {
     let updateMovies;
     Promise.all([apiCalls.allMovies(), apiCalls.getWatchList()])
       .then(data => {
@@ -46,20 +40,16 @@ class App extends Component {
             return { ...movie, onWatchList: false }
           })
         }
-        this.setState({
-          movies: updateMovies,
-          watchList: newDataSet.watchListIds,
-          loaded: true
-        })
+        setMovies(updateMovies);
+        setWatchList(newDataSet.watchListIds);
+        updateloaded(true)
       })
-      .catch(err => this.setState({
-        error: err.message
-      }))
+      .catch(err => setError(err.message))
   }
 
-  sortMovies = () => {
-    let moviesList = this.state.queries.length ? [...this.state.queries] : [...this.state.movies];
-    if (this.state.sorted) {
+  const sortMovies = () => {
+    let moviesList = queries.length ? [...queries] : [...movies];
+    if (sorted) {
       moviesList.sort((a, b) => {
         return new Date(a.release_date) - new Date(b.release_date)
       })
@@ -68,42 +58,34 @@ class App extends Component {
         return new Date(a.release_date) - new Date(b.release_date)
       })
     }
-    if (this.state.queries.length) {
-      this.setState((prevState) => {
-        return { queries: moviesList, sorted: !prevState.sorted }
-      })
+    if (queries.length) {
+      setqueries(moviesList);
+      updateSorted(prevSortState => !prevSortState)
     } else {
-      this.setState((prevState) => {
-        return { movies: moviesList, sorted: !prevState.sorted }
-      })
+      setMovies(moviesList);
+      updateSorted(prevSortState => !prevSortState)
     }
   }
 
-  getSearchedMovies = (queriedMovies) => {
-    this.setState({
-      queries: queriedMovies
-    })
+  const getSearchedMovies = (queriedMovies) => {
+    setqueries(queriedMovies)
   }
 
-  addToWatchList = (id) => {
+  const addToWatchList = (id) => {
     apiCalls.addToWatchList(id)
-      .then(() => this.updateWatchStatus(id))
-      .catch(err => this.setState({
-        error: err.message
-      }))
+      .then(() => updateWatchStatus(id))
+      .catch(err => setError(err.message))
   }
 
-  removeFromWatchList = (id) => {
+  const removeFromWatchList = (id) => {
     apiCalls.removeFromWatchList(id)
-      .then(() => this.updateWatchStatus(id))
-      .catch(err => this.setState({
-        error: err.message
-      }))
+      .then(() => updateWatchStatus(id))
+      .catch(err => setError(err.message))
   }
 
-  updateWatchStatus = (id) => {
-    const movies = [...this.state.movies]
-    const updateMovies = movies.map(movie => {
+  const updateWatchStatus = (id) => {
+    const allMovies = [...movies]
+    const updateMovies = allMovies.map(movie => {
       if (movie.id === id) {
         return { ...movie, onWatchList: !movie.onWatchList }
       } else {
@@ -112,15 +94,12 @@ class App extends Component {
     })
     apiCalls.getWatchList()
       .then(data => {
-        this.setState({
-          movies: updateMovies,
-          watchList: data.watchListIds
-        })
+        setMovies(updateMovies);
+        setWatchList(data.watchListIds);
       })
   }
 
-  getWatchList = () => {
-    const { movies, watchList } = this.state;
+  const getWatchList = () => {
     const watchListMovies = watchList.reduce((moviesOnList, watchListId) => {
       movies.forEach(movie => {
         if (movie.id === watchListId) {
@@ -132,46 +111,45 @@ class App extends Component {
     return watchListMovies;
   }
 
-  render() {
-    const { movies, queries, sorted, error, loaded } = this.state;
-    const displayMovies = queries.length ? queries : movies;
-    return (
-      <main className='App'>
-        {error && <Error />}
-        {!loaded && <Loading />}
 
-        <Route path='/' exact
-          render={() =>
-            <Navigation
-              movies={displayMovies}
-              getSearchedMovies={this.getSearchedMovies}
-              sortMovies={this.sortMovies}
-              sortStatus={sorted}
-            />
-          } />
 
-        <Route path='/' exact
-          render={() =>
-            <Movies
-              movies={displayMovies}
-              addToWatchList={this.addToWatchList}
-              removeFromWatchList={this.removeFromWatchList}
-            />
-          } />
+  return (
+    <main className='App'>
+      {error && <Error />}
+      {!loaded && <Loading />}
 
-        <Route path='/movie/:id' component={ChosenMovie} />
-        <Route path='/watch-list'
-          render={() =>
-            <WatchList
-              watchListMovies={this.getWatchList}
-              addToWatchList={this.addToWatchList}
-              removeFromWatchList={this.removeFromWatchList}
-            />
-          }
-        />
-      </main>
-    )
-  }
+      <Route path='/' exact
+        render={() =>
+          <Navigation
+            movies={displayMovies}
+            getSearchedMovies={getSearchedMovies}
+            sortMovies={sortMovies}
+            sortStatus={sorted}
+          />
+        } />
+
+      <Route path='/' exact
+        render={() =>
+          <Movies
+            movies={displayMovies}
+            addToWatchList={addToWatchList}
+            removeFromWatchList={removeFromWatchList}
+          />
+        } />
+
+      <Route path='/movie/:id' component={ChosenMovie} />
+      <Route path='/watch-list'
+        render={() =>
+          <WatchList
+            watchListMovies={getWatchList}
+            addToWatchList={addToWatchList}
+            removeFromWatchList={removeFromWatchList}
+          />
+        }
+      />
+    </main>
+  )
+
 }
 
 export default App;
