@@ -1,9 +1,11 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import App from '../App';
 import { apiCalls } from '../apiCalls';
 import { _movies } from './mockData/appMockData';
+import { _movie, _video } from '../test/mockData/chosenMovieMockData';
 import { Router, MemoryRouter } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 jest.mock('../apiCalls');
@@ -17,36 +19,33 @@ describe("App Component", () => {
 
   describe('getData', () => {
 
-    it('should call allMovies', () => {
+    it('should call allMovies', async () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>)
-      expect(apiCalls.allMovies).toHaveBeenCalledTimes(1);
+      await waitFor(() => expect(apiCalls.allMovies).toHaveBeenCalledTimes(1));
     })
 
-    it('should render loading', () => {
+    it('should render loading', async () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>)
       const loadingMessage = screen.getByText('Loading...');
-      expect(loadingMessage).toBeInTheDocument();
+      await waitFor(() => expect(loadingMessage).toBeInTheDocument());
     })
 
     it('should load all movies', async () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>)
-      const mockTitle1 = await waitFor(() => screen.getByText('Money Plane'));
-      const mockImgs1 = await waitFor(() => screen.getAllByRole('img'));
-      const mockAvgRating1 = await waitFor(() => screen.getByText('6.7'));
-      const mockReleaseDate1 = await waitFor(() => screen.getByText('Aug 19, 2020'));
-      expect(mockTitle1).toBeInTheDocument();
-      expect(mockImgs1).toHaveLength(10);
-      expect(mockAvgRating1).toBeInTheDocument();
-      expect(mockReleaseDate1).toBeInTheDocument();
+
+      await waitFor(() => expect(screen.getByText('Money Plane')).toBeInTheDocument());
+      await waitFor(() => expect(screen.getAllByRole('img')[0]).toBeInTheDocument());
+      await waitFor(() => expect(screen.getByText('6.7')).toBeInTheDocument());
+      await waitFor(() => expect(screen.getByText('Aug 19, 2020')).toBeInTheDocument());
     })
 
     it('should load correct url', async () => {
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>);
-      expect(history.location.pathname).toBe("/");
+      await waitFor(() => expect(history.location.pathname).toBe("/"));
     })
 
   })
@@ -145,11 +144,15 @@ describe("App Component", () => {
   describe('Chosen movie', () => {
 
     it('should redirect upon clicking on movie', async () => {
+      apiCalls.selectMovie.mockResolvedValueOnce(_movie);
+      apiCalls.selectVideo.mockResolvedValueOnce(_video);
       const history = createMemoryHistory();
       render(<Router history={history}><App /></Router>);
+
       const mockImg = await waitFor(() => screen.getByAltText('Money Plane'));
       userEvent.click(mockImg)
-      expect(history.location.pathname).toEqual('/movie/694919');
+
+      await waitFor(() => expect(history.location.pathname).toEqual('/movie/694919'));
     })
 
   })
