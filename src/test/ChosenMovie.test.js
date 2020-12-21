@@ -16,27 +16,27 @@ describe('ChosenMovie Component', () => {
     apiCalls.selectVideo.mockResolvedValueOnce(_video);
   })
 
-  it('should display loading', () => {
+  it('should display loading', async () => {
     const history = createMemoryHistory();
     render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
 
     const loadingScreen = screen.getByText('Loading...');
 
-    expect(loadingScreen).toBeInTheDocument();
+    await waitFor(() => expect(loadingScreen).toBeInTheDocument());
   })
 
-  it('should call selectMovie', () => {
+  it('should call selectMovie', async () => {
     const history = createMemoryHistory();
     render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
 
-    expect(apiCalls.selectMovie).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(apiCalls.selectMovie).toHaveBeenCalledTimes(1));
   })
 
-  it('should call selectVideo', () => {
+  it('should call selectVideo', async () => {
     const history = createMemoryHistory();
     render(<Router history={history}><ChosenMovie match={_movieId} /></Router>)
 
-    expect(apiCalls.selectVideo).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(apiCalls.selectVideo).toHaveBeenCalledTimes(1));
   })
 
   it('should render correctly', async () => {
