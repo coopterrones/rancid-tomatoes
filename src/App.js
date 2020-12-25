@@ -8,6 +8,7 @@ import Loading from './components/Loading';
 import Navigation from './components/Navigation';
 import Error from './components/Error';
 import WatchList from './components/WatchList';
+import MovieCard from './components/MovieCard';
 
 const App = () => {
   const [movies, setMovies] = useState([]);
@@ -18,138 +19,144 @@ const App = () => {
   const [loaded, updateloaded] = useState(false);
   const displayMovies = queries.length ? queries : movies;
 
-  useEffect(() => getData(), [])
+  useEffect(() => getData(), []);
 
   const getData = () => {
     let updateMovies;
     Promise.all([apiCalls.allMovies(), apiCalls.getWatchList()])
-      .then(data => {
+      .then((data) => {
         const newDataSet = data.reduce((allData, dataSet) => {
-          return allData = { ...allData, ...dataSet }
-        }, {})
+          return (allData = { ...allData, ...dataSet });
+        }, {});
         if (newDataSet.watchListIds.length) {
-          updateMovies = newDataSet.movies.map(movie => {
+          updateMovies = newDataSet.movies.map((movie) => {
             if (newDataSet.watchListIds.includes(movie.id)) {
-              return { ...movie, onWatchList: true }
+              return { ...movie, onWatchList: true };
             } else {
-              return { ...movie, onWatchList: false }
+              return { ...movie, onWatchList: false };
             }
-          })
+          });
         } else {
-          updateMovies = newDataSet.movies.map(movie => {
-            return { ...movie, onWatchList: false }
-          })
+          updateMovies = newDataSet.movies.map((movie) => {
+            return { ...movie, onWatchList: false };
+          });
         }
         setMovies(updateMovies);
         setWatchList(newDataSet.watchListIds);
-        updateloaded(true)
+        updateloaded(true);
       })
-      .catch(err => setError(err.message))
-  }
+      .catch((err) => setError(err.message));
+  };
 
   const sortMovies = () => {
     let moviesList = queries.length ? [...queries] : [...movies];
     if (sorted) {
       moviesList.sort((a, b) => {
-        return new Date(a.release_date) - new Date(b.release_date)
-      })
+        return new Date(a.release_date) - new Date(b.release_date);
+      });
     } else {
       moviesList.sort((b, a) => {
-        return new Date(a.release_date) - new Date(b.release_date)
-      })
+        return new Date(a.release_date) - new Date(b.release_date);
+      });
     }
     if (queries.length) {
       setqueries(moviesList);
-      updateSorted(prevSortState => !prevSortState)
+      updateSorted((prevSortState) => !prevSortState);
     } else {
       setMovies(moviesList);
-      updateSorted(prevSortState => !prevSortState)
+      updateSorted((prevSortState) => !prevSortState);
     }
-  }
+  };
 
   const getSearchedMovies = (queriedMovies) => {
-    setqueries(queriedMovies)
-  }
+    setqueries(queriedMovies);
+  };
 
   const addToWatchList = (id) => {
-    apiCalls.addToWatchList(id)
+    apiCalls
+      .addToWatchList(id)
       .then(() => updateWatchStatus(id))
-      .catch(err => setError(err.message))
-  }
+      .catch((err) => setError(err.message));
+  };
 
   const removeFromWatchList = (id) => {
-    apiCalls.removeFromWatchList(id)
+    apiCalls
+      .removeFromWatchList(id)
       .then(() => updateWatchStatus(id))
-      .catch(err => setError(err.message))
-  }
+      .catch((err) => setError(err.message));
+  };
 
   const updateWatchStatus = (id) => {
-    const updateMovies = movies.map(movie => {
+    const updateMovies = movies.map((movie) => {
       if (movie.id === id) {
-        return { ...movie, onWatchList: !movie.onWatchList }
+        return { ...movie, onWatchList: !movie.onWatchList };
       } else {
-        return movie
+        return movie;
       }
-    })
-    apiCalls.getWatchList()
-      .then(data => {
-        setMovies(updateMovies);
-        setWatchList(data.watchListIds);
-      })
-  }
+    });
+    apiCalls.getWatchList().then((data) => {
+      setMovies(updateMovies);
+      setWatchList(data.watchListIds);
+    });
+  };
 
   const getWatchList = () => {
     const watchListMovies = watchList.reduce((moviesOnList, watchListId) => {
-      movies.forEach(movie => {
+      movies.forEach((movie) => {
         if (movie.id === watchListId) {
           moviesOnList.push(movie);
         }
-      })
+      });
       return moviesOnList;
-    }, [])
+    }, []);
     return watchListMovies;
-  }
-
-
+  };
 
   return (
     <main className='App'>
       {error && <Error />}
       {!loaded && <Loading />}
 
-      <Route path='/' exact
-        render={() =>
+      <Route
+        path='/'
+        exact
+        render={() => (
           <Navigation
             movies={displayMovies}
             getSearchedMovies={getSearchedMovies}
             sortMovies={sortMovies}
             sortStatus={sorted}
           />
-        } />
+        )}
+      />
 
-      <Route path='/' exact
-        render={() =>
-          <Movies
-            movies={displayMovies}
-            addToWatchList={addToWatchList}
-            removeFromWatchList={removeFromWatchList}
-          />
-        } />
+      <Route
+        path='/'
+        exact
+        render={() => (
+          <Movies>
+            <MovieCard
+              movies={displayMovies}
+              addToWatchList={addToWatchList}
+              removeFromWatchList={removeFromWatchList}
+            />
+          </Movies>
+        )}
+      />
 
       <Route path='/movie/:id' component={ChosenMovie} />
-      <Route path='/watch-list'
-        render={() =>
+      <Route
+        path='/watch-list'
+        render={() => (
           <WatchList
             watchListMovies={getWatchList}
             addToWatchList={addToWatchList}
             removeFromWatchList={removeFromWatchList}
           />
-        }
+        )}
       />
     </main>
-  )
-
-}
+  );
+};
 
 export default App;
-
