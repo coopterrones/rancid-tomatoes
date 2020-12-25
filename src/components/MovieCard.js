@@ -10,7 +10,7 @@ const MovieCard = ({ movies, addToWatchList, removeFromWatchList }) => {
     const {
       id,
       title,
-      avgRating,
+      average_rating,
       release_date,
       poster_path,
       onWatchList,
@@ -57,7 +57,7 @@ const MovieCard = ({ movies, addToWatchList, removeFromWatchList }) => {
               src={ratingStar}
               alt='rating-star-icon'
             />
-            <p className='average-rating-text'>{avgRating}</p>
+            <p className='average-rating-text'>{average_rating.toFixed(1)}</p>
           </section>
           <section className='realease-date-container'>
             <p className='release-date-text'>
