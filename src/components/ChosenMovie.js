@@ -6,6 +6,7 @@ import runtimeReel from '../assets/runtime-reel.svg';
 import { apiCalls } from '../apiCalls';
 import { Link } from 'react-router-dom';
 import Loading from './Loading';
+import { Spring } from 'react-spring/renderprops';
 
 const ChosenMovie = ({ match }) => {
   const [movie, setMovie] = useState(null);
@@ -97,14 +98,24 @@ const ChosenMovie = ({ match }) => {
           </section>
           <section className='video-frame'>
             {video && (
-              <iframe
-                className='video-container'
-                src={`https://youtube.com/embed/${video.key}`}
-                alt='trailer-iframe-video-player'
-                title='trailer-video-player'
-                height='400'
-                width='700'
-              ></iframe>
+              <Spring
+                config={{ mass: 2, tension: 6.5, friction: 0, clamp: true }}
+                from={{ opactiy: 0, marginTop: -250 }}
+                to={{ opactiy: 1, marginTop: 0 }}
+              >
+                {(props) => (
+                  <section className='video-frame' style={props}>
+                    <iframe
+                      className='video-container'
+                      src={`https://youtube.com/embed/${video.key}`}
+                      alt='trailer-iframe-video-player'
+                      title='trailer-video-player'
+                      height='400'
+                      width='700'
+                    ></iframe>
+                  </section>
+                )}
+              </Spring>
             )}
           </section>
         </section>
