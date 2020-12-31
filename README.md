@@ -12,7 +12,7 @@ Rancid Tomatillos MVP; Paired Project; Module 3
 
 ## Description
 
-The Rancid Tomatoes application allows a user to view a library of movies from an API. Within this library the user is capable of sorting and searching through their library. This application was built using the React Framework with the accompaning JSX syntax and tested with a combination of React-Testing-Library and Jest. Our stretch goal included creating a watch-list where users can add and remove movies. The associated technologies used for the stretch goal included an Express server that was deployed using Heroku. This allowed the users to update their watch list using CRUD methods.
+The Rancid Tomatoes application allows a user to view a library of movies from an API. Within this library the user is capable of sorting and searching through their library. This application was built using the React Framework with the accompaning JSX syntax, React hooks and tested with a combination of React-Testing-Library and Jest. Our stretch goal included creating a watch-list where users can add and remove movies. The associated technologies used for the stretch goal included an Express server that was deployed using Heroku. This allowed the users to update their watch list using CRUD methods.
 
 ## Usage
 
@@ -73,7 +73,12 @@ Navigate to the deployed site on Github Pages.
     - Search
     - Sort
     - Watch List
-
+    
+  ### Additional updates
+  
+  - Refactor Using React Hooks
+  - Update Testing accordingly
+  
   ## Chalenges and Wins
 
   - **Challenges : **
@@ -87,6 +92,7 @@ Navigate to the deployed site on Github Pages.
   Technologies Used
 
   - React
+  - React hooks
   - React Testing Library
   - Jest
   - Express
