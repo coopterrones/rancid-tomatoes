@@ -2,7 +2,7 @@
 
 [Elle Li](https://github.com/Elle624)
 
-[Cooper Terones](https://github.com/coopterrones)
+[Cooper Terrones](https://github.com/coopterrones)
 
 [Deploy Site](https://coopterrones.github.io/rancid-tomatoes)
 
