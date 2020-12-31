@@ -1,17 +1,17 @@
 import React from 'react';
-import {render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { _movies } from './mockdata/moviesMockData';
 import WatchList from '../components/WatchList';
 import { MemoryRouter, Router } from 'react-router-dom';
-import{ createMemoryHistory } from 'history';
+import { createMemoryHistory } from 'history';
 import userEvent from '@testing-library/user-event';
 
 describe('Watch list component', () => {
+
   it('should render empty watch list correctly', () => {
     render(
-      <WatchList watchListMovies={()=> jest.fn()} />,
-      {wrapper: MemoryRouter}
+      <WatchList watchListMovies={jest.fn().mockImplementation(() => [])} />,
+      { wrapper: MemoryRouter }
     )
 
     const backButton = screen.getByRole('img');
@@ -20,18 +20,20 @@ describe('Watch list component', () => {
     expect(backButton).toBeInTheDocument();
     expect(watchListEmptyMessage).toBeInTheDocument();
   })
+
   it('should render a working back button', () => {
     const history = createMemoryHistory();
     render(
       <Router history={history}>
-        <WatchList watchListMovies={() => jest.fn()}/>
+        <WatchList watchListMovies={jest.fn().mockImplementation(() => [])} />
       </Router>
     )
 
     const backButton = screen.getByRole('img');
     userEvent.click(backButton);
-    
+
     expect(history.location.pathname).not.toBe('/watch-list');
     expect(history.location.pathname).toBe('/');
   })
+
 })

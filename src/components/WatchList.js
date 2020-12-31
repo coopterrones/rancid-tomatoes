@@ -4,44 +4,35 @@ import '../styles/WatchList.scss';
 import { Link } from 'react-router-dom';
 import backButton from '../assets/back-button.svg';
 
-const WatchList = ({ watchListMovies, addToWatchList, removeFromWatchList }) => {
+const WatchList = ({
+  watchListMovies,
+  addToWatchList,
+  removeFromWatchList,
+}) => {
   const watchList = watchListMovies();
-  if (watchList.length) {
-    const watchListMovieCards = watchList.map((movie) => {
-      const date = new Date(movie.release_date);
-      const formattedDate = date.toDateString().split(' ');
-      return (
+  return (
+    <section className='watch-list-movies-container'>
+      <Link to='/'>
+        <img
+          className='back-button-icon'
+          src={backButton}
+          alt='back-button-icon'
+        />
+      </Link>
+
+      {watchList.length ? (
         <MovieCard
-          id={movie.id}
-          title={movie.title}
-          avgRating={movie.average_rating.toFixed(1)}
-          releaseDate={formattedDate}
-          posterImg={movie.poster_path}
-          onWatchList={movie.onWatchList}
-          key={movie.id}
+          movies={watchList}
           addToWatchList={addToWatchList}
           removeFromWatchList={removeFromWatchList}
         />
-      )
-    })
-    return (
-      <section className='watch-list-movies-container'>
-        <Link to='/'>
-          <img data-testid='return-btn' className="back-button-icon" src={backButton} alt='back-button-icon' />
-        </Link>
-        {watchListMovieCards}
-      </section>
-    )
-  } else {
-    return (
-      <section className='watch-list-empty'>
-        <Link to='/'>
-          <img data-testid='return-btn' className="back-button-icon" src={backButton} alt='back-button-icon' />
-        </Link>
-        <p className='watch-list-empty-prompt'>No movies in your watch list. Please add to list!</p>
-      </section>
-    )
-  }
-}
+      ) : (
+        <p className='watch-list-empty-prompt'>
+          No movies in your watch list. Please add to list!
+        </p>
+      )}
+    </section>
+  );
+};
 
 export default WatchList;
