@@ -2,9 +2,9 @@
 
 [Elle Li](https://github.com/Elle624)
 
-[Cooper Terrones](https://github.com/coopterrones)
+[Cooper Terrones](https://rancid-tomatoes.vercel.app)
 
-[Deploy Site](https://coopterrones.github.io/rancid-tomatoes)
+[Deploy Site](https://rancid-tomatoes.vercel.app)
 
 [Link to server repo](https://github.com/coopterrones/rancid-tomatillos-server)
 
@@ -73,12 +73,12 @@ Navigate to the deployed site on Github Pages.
     - Search
     - Sort
     - Watch List
-    
+
   ### Additional updates
-  
+
   - Refactor Using React Hooks
   - Update Testing accordingly
-  
+
   ## Chalenges and Wins
 
   - **Challenges : **
@@ -106,16 +106,28 @@ Navigate to the deployed site on Github Pages.
   - Zoom
   - Tuple
 
-## Demos 
+## Demos
+
 ### Movie Library
+
 ![Movie Library](https://media.giphy.com/media/TYqKgtVbeibTXOgqzN/giphy.gif)
-### View Movie 
+
+### View Movie
+
 ![View Movie](https://media.giphy.com/media/b6sViy0Ux4UMtDyBNR/giphy.gif)
-### Sort Movies 
+
+### Sort Movies
+
 ![Sort Movies](https://media.giphy.com/media/2kkumQ1OPvTk0MhRrt/giphy.gif)
-### Search 
+
+### Search
+
 ![Search Movies](https://media.giphy.com/media/HrhegHvoIxwnEmv7rr/giphy.gif)
-### Watch List 
+
+### Watch List
+
 ![Watch List](https://media.giphy.com/media/HrhegHvoIxwnEmv7rr/giphy.gif)
+
 ### Responsive Design
+
 ![Responsive](https://media.giphy.com/media/vpF1iJtyOUxxPijGMB/giphy.gif)
