@@ -1,6 +1,6 @@
 # Rancid Tomatoes
 
-[Elle Li](https://github.com/Elle624)
+[Elle Li](https://github.com/yiranli624)
 
 [Cooper Terrones](https://rancid-tomatoes.vercel.app)
 
